@@ -1,4 +1,4 @@
-objShare v1.0.0
+objShare v1.0.1
 ---
 _Copyright © 2016 - Chris Anselmo_
 

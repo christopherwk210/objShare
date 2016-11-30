@@ -128,7 +128,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.dismissDrops();
     this.alertService.showModal('About', this.aboutMessage, true, 'Dismiss', 'Visit Github Page', function(res:boolean) {
       if (res === false) {
-        //Navigate to github page
+        window.open('https://github.com/christopherwk210/objShare');
       }
     });
   }
