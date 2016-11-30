@@ -1,0 +1,190 @@
+@mixin outline_glow() {
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 10px rgba(150,195,150,.5);
+  }
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 0;
+  margin-bottom: 1rem;
+
+  label {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+    user-select: none;
+  }
+
+  input, select {
+    flex-grow: 1;
+  }
+}
+
+.check-row {
+  display: flex;
+  flex-direction: row;
+  align-content:space-between;
+
+  label {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+
+    user-select: none;
+
+    cursor: pointer;
+    :disabled {
+      cursor: not-allowed;
+    }
+
+    input {
+      margin-right: 0.5rem;
+      @include outline_glow();
+    }
+  }
+
+  margin-bottom: 0.5rem;
+}
+
+.select-form {
+  border-radius: 4px;
+  padding: 0.5em;
+  height: 2.5em;
+  line-height: 1.5em;
+  border: solid 1px $color-green-light;
+  font-weight: lighter;
+
+  @include outline_glow();
+}
+
+select {
+  border-radius: 4px;
+  padding: 0.25em;
+  height: 2em;
+  line-height: 1.5em;
+  border: solid 1px $color-green-light;
+  font-weight: lighter;
+  background-color: white;
+
+  @include outline_glow();
+}
+
+input[type=text], input[type=number] {
+  border-radius: 4px;
+  padding: 0.25em;
+  height: 1.5em;
+  line-height: 1.5em;
+  border: solid 1px $color-green-light;
+  font-weight: lighter;
+
+  @include outline_glow();
+}
+
+.select-list {
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border:solid 1px rgb(153, 153, 153);
+
+  @include outline_glow();
+
+  option {
+    padding: 0.15rem;
+    padding-top: 4px;
+    padding-left: 6px;
+
+    &:checked {
+      border-radius: 4px;
+      background: $color-green-dark linear-gradient(0deg, $color-green-dark 0%, $color-green-dark 100%);
+      background: repeating-linear-gradient(
+        45deg,
+        $color-green-dark,
+        $color-green-dark 10px,
+        rgb(69, 192, 68) 10px,
+        rgb(69, 192, 68) 20px
+      );
+    }
+  }
+}
+
+.btn {
+  background-color: $color-green;
+  padding: 0.5rem;
+  color:black;
+  border: solid 1px $color-green-darker;
+  outline: 0;
+  cursor: pointer;
+  text-decoration: none;
+
+  @include outline_glow();
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  &:hover {
+    color: white;
+  }
+
+  &:active {
+    background-color: $color-green-darkest;
+  }
+
+  &.btn-outline {
+    background-color: rgba(0,0,0,0);
+
+    &:hover {
+      background-color: $color-green;
+    }
+
+    &:active {
+      background-color: $color-green-darkest;
+    }
+  }
+
+  &.btn-light {
+    background-color: $color-green-light;
+
+    &:active {
+      background-color: $color-green-darkest;
+    }
+  }
+
+  &.btn-dark {
+    background-color: $color-green-dark;
+
+    &:active {
+      background-color: $color-green-darkest;
+    }
+  }
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+
+  * {
+    flex: 1;
+    border-right: 0;
+  }
+
+  .btn:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+
+  .btn:last-child {
+    border-radius: 0 5px 5px 0;
+    border-right: solid 1px $color-green-darker;
+  }
+}

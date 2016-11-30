@@ -1,0 +1,22 @@
+<div class="events flex-panel">
+  <h3 class="title">Events</h3>
+  <div class="panel-content-flex">
+    <select (change)="changeCurrentEvent(eventSelectList.value)"
+    #eventSelectList class="flex-grow select-list" size="4" [(ngModel)]="selectedListEvent">
+      <option *ngFor="let event of objectDataService.objectData.events; let i = index;" [value]="event.event">
+        {{event.event}}
+      </option>
+    </select>
+    <div class="button-group">
+      <button (click)="addEventVisible = true" class="btn btn-light">Add</button>
+      <button (click)="changeExistingEvent(eventSelectList.value)" class="btn">Change</button>
+      <button (click)="handleRemoveEvent(eventSelectList.value)" class="btn btn-dark">Remove</button>
+    </div>
+  </div>
+</div>
+
+<sd-add-event
+[visible]="addEventVisible"
+(dismiss)="addEventVisible = $event"
+(eventSelected)="handleNewEvent($event)">
+</sd-add-event>

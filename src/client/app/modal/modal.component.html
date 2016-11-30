@@ -1,0 +1,21 @@
+<div *ngIf="alertService.alertVisible" class="modal-container">
+  <div class="modal">
+    <h3 class="title">
+      {{alertService.alertTitle}}
+      <div *ngIf="alertService.closeButton" class="close-btn" (click)="dismiss()">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+      </div>
+    </h3>
+    <div class="panel-content">
+      <p [innerHTML]="alertService.alertText" class="modal-text"></p>
+      <div class="modal-btn-row">
+        <button *ngIf="alertService.cancelButtonText !== ''" (click)="dismiss()" class="btn btn-dark">
+          {{alertService.cancelButtonText}}
+        </button>
+        <button (click)="dismiss(true)" class="btn btn-dark">
+          {{alertService.buttonText}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

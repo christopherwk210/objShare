@@ -1,0 +1,53 @@
+<div class="gml flex-panel">
+  <h3 class="title">
+    GML
+    <span *ngIf="current_event !== '' && showSettings === false"> - {{current_event}}</span>
+  </h3>
+  <div style="padding:0;" class="panel-content-flex" id="editor-container">
+    <div class="gml-toolbar">
+      <div class="button-group">
+        <button (click)="undo()" class="btn"><i class="fa fa-undo" aria-hidden="true"></i> Undo</button>
+        <button (click)="redo()" class="btn"><i class="fa fa-repeat" aria-hidden="true"></i> Redo</button>
+        <button (click)="find()" class="btn"><i class="fa fa-search" aria-hidden="true"></i> Find</button>
+        <button (click)="editorSettings()" class="btn"><i class="fa fa-gear" aria-hidden="true"></i> Settings</button>
+      </div>
+    </div>
+    <div class="flex-grow" #editor id="editor"></div>
+  </div>
+</div>
+
+<!-- Editor Settings -->
+<div *ngIf="showSettings" class="editor-settings-container">
+  <div class="editor-settings">
+    <h3 class="title">
+      Editor Settings
+      <div class="close-btn" (click)="showSettings = false">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+      </div>
+    </h3>
+    <div class="panel-content">
+      <div class="input-row">
+        <label>Font size:</label>
+        <input numbersOnly [(ngModel)]="editorSettingsFontSize" style="margin-left: 0.5rem;" type="number" value="16" min="8" max="64">
+      </div>
+      <div class="input-row">
+        <label>Tab size:</label>
+        <input numbersOnly [(ngModel)]="editorSettingsTabSize" style="margin-left: 0.5rem;" type="number" value="4" min="1" max="12">
+      </div>
+      <div style="margin-bottom: 16px;" class="check-row">
+        <label>
+          <input [(ngModel)]="editorSettingsLineHighlighting" checked type="checkbox"> Line highlighting
+        </label>
+      </div>
+      <p>
+        The <a target="_blank" href="https://ace.c9.io/#nav=about">Ace</a> editor has many useful built-in shortcuts that you
+        can find <a target="_blank" href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts">here</a>.
+      </p>
+      <div style="text-align:center">
+        <button (click)="showSettings = false" class="btn btn-dark">Cancel</button>
+        <button (click)="editorDefaults()" class="btn btn-dark">Defaults</button>
+        <button (click)="saveEditorSettings()" class="btn btn-dark">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

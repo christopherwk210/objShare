@@ -1,0 +1,19 @@
+div.ace_status-bar {
+  padding: 0.5rem;
+  background-color: $color-green;
+  font-size: 14px;
+  font-weight: lighter;
+  color: rgb(4, 55, 2);
+}
+
+span#ace_status-hint {
+  margin-left: 1rem;
+}
+
+span.argument.current {
+  font-weight: bold;
+}
+
+.ace_function, .ace_variable, .ace_constant {
+  color: #900000;
+}

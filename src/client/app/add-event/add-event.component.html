@@ -1,0 +1,781 @@
+<div *ngIf="visible" class="add-event-container">
+  <div class="add-event">
+    <h3 class="title">
+      Add Event
+      <div class="close-btn" (click)="sendAndDismiss()">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+      </div>
+    </h3>
+    <div [ngSwitch]="selection">
+
+      <!-- Base selection -->
+      <div *ngSwitchCase="'base'" class="panel-content">
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.create, eventsOrder.create, eTypes.create, eEnumbs.create])"class="btn">
+            <i class="fa fa-fw fa-lightbulb-o" aria-hidden="true"></i> Create
+          </button>
+          <button (click)="selection = 'mouse'" class="btn">
+            <i class="fa fa-fw fa-mouse-pointer" aria-hidden="true"></i> Mouse
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.destroy, eventsOrder.destroy, eTypes.destroy, eEnumbs.destroy])" class="btn">
+            <i class="fa fa-fw fa-recycle" aria-hidden="true"></i> Destroy
+          </button>
+          <button (click)="selection = 'other'" class="btn">
+            <i class="fa fa-fw fa-diamond" aria-hidden="true"></i> Other
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'alarm'" class="btn">
+            <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Alarm
+          </button>
+          <button (click)="selection = 'draw'" class="btn">
+            <i class="fa fa-fw fa-paint-brush" aria-hidden="true"></i> Draw
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'step'" class="btn">
+            <i class="fa fa-fw fa-paw" aria-hidden="true"></i> Step
+          </button>
+          <button (click)="selection = 'keyboard'" class="btn">
+            <i class="fa fa-fw fa-keyboard-o" aria-hidden="true"></i> Keyboard
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'collision'" class="btn">
+            <i class="fa fa-fw fa-exchange" aria-hidden="true"></i> Collision
+          </button>
+          <button (click)="selection = 'async'" class="btn">
+            <i class="fa fa-fw fa-bolt" aria-hidden="true"></i> Asynchronous
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss()" class="btn btn-dark">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Step -->
+      <div *ngSwitchCase="'step'" class="panel-content">
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.step.begin, eventsOrder.step, eTypes.step, eEnumbs.step.begin])" class="btn">
+            Begin Step
+          </button>
+          <button (click)="sendAndDismiss([eventList.step.end, eventsOrder.step, eTypes.step, eEnumbs.step.end])" class="btn">
+            End Step
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.step.normal, eventsOrder.step, eTypes.step, eEnumbs.step.normal])" class="btn">
+            Step
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Keyboard -->
+      <div *ngSwitchCase="'keyboard'" class="panel-content">
+        <div class="input-col-block">
+          <label>Check type:</label>
+          <select class="select-form" #keyboardTypeSelect>
+            <option value="keyboard">Keyboard</option>
+            <option value="keypress">Keyboard Pressed</option>
+            <option value="keyrelease">Keyboard Released</option>
+          </select>
+        </div>
+        <div class="input-col-block">
+          <label>Key:</label>
+          <select class="select-form" #kSelect>
+            <option data-keycode="37" value="< Left >">Left</option>
+            <option data-keycode="39" value="< Right >">Right</option>
+            <option data-keycode="38" value="< Up >">Up</option>
+            <option data-keycode="40" value="< Down >">Down</option>
+            <option disabled>──────────</option>
+            <option data-keycode="17" value="< Ctrl >">Ctrl</option>
+            <option data-keycode="18" value="< Alt >">Alt</option>
+            <option data-keycode="16" value="< Shift >">Shift</option>
+            <option data-keycode="32" value="< Space >">Space</option>
+            <option data-keycode="13" value="< Enter >">Enter</option>
+            <option disabled>──────────</option>
+            <option data-keycode="96" value="Keypad 0">Keypad 0</option>
+            <option data-keycode="97" value="Keypad 1">Keypad 1</option>
+            <option data-keycode="98" value="Keypad 2">Keypad 2</option>
+            <option data-keycode="99" value="Keypad 3">Keypad 3</option>
+            <option data-keycode="100" value="Keypad 4">Keypad 4</option>
+            <option data-keycode="101" value="Keypad 5">Keypad 5</option>
+            <option data-keycode="102" value="Keypad 6">Keypad 6</option>
+            <option data-keycode="103" value="Keypad 7">Keypad 7</option>
+            <option data-keycode="104" value="Keypad 8">Keypad 8</option>
+            <option data-keycode="105" value="Keypad 9">Keypad 9</option>
+            <option data-keycode="111" value="Keypad /">Keypad /</option>
+            <option data-keycode="106" value="Keypad *">Keypad *</option>
+            <option data-keycode="109" value="Keypad -">Keypad -</option>
+            <option data-keycode="107" value="Keypad +">Keypad +</option>
+            <option data-keycode="110" value="Keypad .">Keypad .</option>
+            <option disabled>──────────</option>
+            <option data-keycode="48" value="0">0</option>
+            <option data-keycode="49" value="1">1</option>
+            <option data-keycode="50" value="2">2</option>
+            <option data-keycode="51" value="3">3</option>
+            <option data-keycode="52" value="4">4</option>
+            <option data-keycode="53" value="5">5</option>
+            <option data-keycode="54" value="6">6</option>
+            <option data-keycode="55" value="7">7</option>
+            <option data-keycode="56" value="8">8</option>
+            <option data-keycode="57" value="9">9</option>
+            <option disabled>──────────</option>
+            <option data-keycode="112" value="F1">F1</option>
+            <option data-keycode="113" value="F2">F2</option>
+            <option data-keycode="114" value="F3">F3</option>
+            <option data-keycode="115" value="F4">F4</option>
+            <option data-keycode="116" value="F5">F5</option>
+            <option data-keycode="117" value="F6">F6</option>
+            <option data-keycode="118" value="F7">F7</option>
+            <option data-keycode="119" value="F8">F8</option>
+            <option data-keycode="120" value="F9">F9</option>
+            <option data-keycode="121" value="F10">F10</option>
+            <option data-keycode="122" value="F11">F11</option>
+            <option data-keycode="123" value="F12">F12</option>
+            <option disabled>──────────</option>
+            <option data-keycode="65" value="A">A</option>
+            <option data-keycode="66" value="B">B</option>
+            <option data-keycode="67" value="C">C</option>
+            <option data-keycode="68" value="D">D</option>
+            <option data-keycode="69" value="E">E</option>
+            <option data-keycode="70" value="F">F</option>
+            <option data-keycode="71" value="G">G</option>
+            <option data-keycode="72" value="H">H</option>
+            <option data-keycode="73" value="I">I</option>
+            <option data-keycode="74" value="J">J</option>
+            <option data-keycode="75" value="K">K</option>
+            <option data-keycode="76" value="L">L</option>
+            <option data-keycode="77" value="M">M</option>
+            <option data-keycode="78" value="N">N</option>
+            <option data-keycode="79" value="O">O</option>
+            <option data-keycode="80" value="P">P</option>
+            <option data-keycode="81" value="Q">Q</option>
+            <option data-keycode="82" value="R">R</option>
+            <option data-keycode="83" value="S">S</option>
+            <option data-keycode="84" value="T">T</option>
+            <option data-keycode="85" value="U">U</option>
+            <option data-keycode="86" value="V">V</option>
+            <option data-keycode="87" value="W">W</option>
+            <option data-keycode="88" value="X">X</option>
+            <option data-keycode="89" value="Y">Y</option>
+            <option data-keycode="90" value="Z">Z</option>
+            <option disabled>──────────</option>
+            <option data-keycode="8" value="< Backspace >">< Backspace ></option>
+            <option data-keycode="27" value="< Escape >">< Escape ></option>
+            <option data-keycode="36" value="< Home >">< Home ></option>
+            <option data-keycode="35" value="< End >">< End ></option>
+            <option data-keycode="33" value="< Page up >">< Page up ></option>
+            <option data-keycode="34" value="< Page down >">< Page down ></option>
+            <option data-keycode="46" value="< Delete >">< Delete ></option>
+            <option data-keycode="45" value="< Insert >">< Insert ></option>
+            <option disabled>──────────</option>
+            <option data-keycode="0" value="< No key >">< No key ></option>
+            <option data-keycode="1" value="< Any key >">< Any key ></option>
+          </select>
+        </div>
+        <div class="top-btn-row">
+        <button
+        (click)="sendAndDismissKeyboard(keyboardTypeSelect.value, kSelect.value, kSelect.options[ kSelect.selectedIndex ].dataset.keycode)"
+        class="btn">
+            Add
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Collision -->
+      <div *ngSwitchCase="'collision'" class="panel-content">
+        <div class="input-col-block">
+          <label for="collidingObject">Object to collide with:</label>
+          <input #collidingObject id="collidingObject" type="text" placeholder="obj">
+        </div>
+        <div class="top-btn-row">
+          <button (click)="sendAndDismissCustom(eventList.collision, collidingObject.value)" class="btn">
+            Add
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Async -->
+      <div *ngSwitchCase="'async'" class="panel-content">
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.image, eventsOrder.async, eTypes.async, eEnumbs.async.image])" class="btn">
+            Image Loaded
+          </button>
+          <button (click)="sendAndDismiss([eventList.asynchronous.http, eventsOrder.async, eTypes.async, eEnumbs.async.http])" class="btn">
+            HTTP
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.dialog, eventsOrder.async, eTypes.async, eEnumbs.async.dialog])" class="btn">
+            Dialog
+          </button>
+          <button (click)="sendAndDismiss([eventList.asynchronous.iap, eventsOrder.async, eTypes.async, eEnumbs.async.iap])" class="btn">
+            IAP
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.cloud, eventsOrder.async, eTypes.async, eEnumbs.async.cloud])" class="btn">
+            Cloud
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.networking, eventsOrder.async, eTypes.async, eEnumbs.async.networking])"
+          class="btn">
+            Networking
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.steam, eventsOrder.async, eTypes.async, eEnumbs.async.steam])" class="btn">
+            Steam
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.social, eventsOrder.async, eTypes.async, eEnumbs.async.social])" class="btn">
+            Social
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.asynchronous.push, eventsOrder.async, eTypes.async, eEnumbs.async.push])" class="btn">
+            Push Notification
+          </button>
+          <button (click)="sendAndDismiss([eventList.asynchronous.save, eventsOrder.async, eTypes.async, eEnumbs.async.save])" class="btn">
+            Save / Load
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.recording, eventsOrder.async, eTypes.async, eEnumbs.async.recording])"
+          class="btn">
+            Audio Recording
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.playback, eventsOrder.async, eTypes.async, eEnumbs.async.playback])" class="btn">
+            Audio Playback
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.asynchronous.system, eventsOrder.async, eTypes.async, eEnumbs.async.system])" class="btn">
+            System Event
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Draw -->
+      <div *ngSwitchCase="'draw'" class="panel-content">
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.draw.draw.draw, eventsOrder.draw, eTypes.draw, eEnumbs.draw.draw.draw])" class="btn">
+            Draw
+          </button>
+          <button (click)="sendAndDismiss([eventList.draw.gui.draw, eventsOrder.draw, eTypes.draw, eEnumbs.draw.gui.draw])" class="btn">
+            Draw GUI
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.draw.draw.begin, eventsOrder.draw, eTypes.draw, eEnumbs.draw.draw.begin])" class="btn">
+            Draw Begin
+          </button>
+          <button (click)="sendAndDismiss([eventList.draw.gui.begin, eventsOrder.draw, eTypes.draw, eEnumbs.draw.gui.begin])" class="btn">
+            Draw GUI Begin
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.draw.draw.end, eventsOrder.draw, eTypes.draw, eEnumbs.draw.draw.end])" class="btn">
+            Draw End
+          </button>
+          <button (click)="sendAndDismiss([eventList.draw.gui.end, eventsOrder.draw, eTypes.draw, eEnumbs.draw.gui.end])" class="btn">
+            Draw GUI End
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.draw.pre, eventsOrder.draw, eTypes.draw, eEnumbs.draw.pre])" class="btn">
+            Pre Draw
+          </button>
+          <button (click)="sendAndDismiss([eventList.draw.post, eventsOrder.draw, eTypes.draw, eEnumbs.draw.post])" class="btn">
+            Post Draw
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.draw.resize, eventsOrder.draw, eTypes.draw, eEnumbs.draw.resize])" class="btn">
+            Resize
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Alarm -->
+      <div *ngSwitchCase="'alarm'" class="panel-content">
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.alarm[0], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[0]])" class="btn">
+            Alarm 0
+          </button>
+          <button (click)="sendAndDismiss([eventList.alarm[6], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[6]])" class="btn">
+            Alarm 6
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.alarm[1], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[1]])" class="btn">
+            Alarm 1
+          </button>
+          <button (click)="sendAndDismiss([eventList.alarm[7], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[7]])" class="btn">
+            Alarm 7
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.alarm[2], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[2]])" class="btn">
+            Alarm 2
+          </button>
+          <button (click)="sendAndDismiss([eventList.alarm[8], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[8]])" class="btn">
+            Alarm 8
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.alarm[3], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[3]])" class="btn">
+            Alarm 3
+          </button>
+          <button (click)="sendAndDismiss([eventList.alarm[9], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[9]])" class="btn">
+            Alarm 9
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.alarm[4], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[4]])" class="btn">
+            Alarm 4
+          </button>
+          <button (click)="sendAndDismiss([eventList.alarm[10], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[10]])" class="btn">
+            Alarm 10
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.alarm[5], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[5]])" class="btn">
+            Alarm 5
+          </button>
+          <button (click)="sendAndDismiss([eventList.alarm[11], eventsOrder.alarm, eTypes.alarm, eEnumbs.alarm[11]])" class="btn">
+            Alarm 11
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Other -->
+      <div *ngSwitchCase="'other'" class="panel-content">
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.outside, eventsOrder.other, eTypes.other, eEnumbs.other.outside])" class="btn">
+            Outside room
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.intersect, eventsOrder.other, eTypes.other, eEnumbs.other.intersect])" class="btn">
+            Intersect boundary
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.game.start, eventsOrder.other, eTypes.other, eEnumbs.other.game.start])" class="btn">
+            Game start
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.game.end, eventsOrder.other, eTypes.other, eEnumbs.other.game.end])" class="btn">
+            Game end
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.room.start, eventsOrder.other, eTypes.other, eEnumbs.other.room.start])" class="btn">
+            Room start
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.room.end, eventsOrder.other, eTypes.other, eEnumbs.other.room.end])" class="btn">
+            Room end
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.lives, eventsOrder.other, eTypes.other, eEnumbs.other.lives])" class="btn">
+            No more lives
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.health, eventsOrder.other, eTypes.other, eEnumbs.other.health])" class="btn">
+            No more health
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.animation.end, eventsOrder.other, eTypes.other, eEnumbs.other.animation.end])"
+          class="btn">
+            Animation end
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.animation.update, eventsOrder.other, eTypes.other, eEnumbs.other.animation.update])"
+          class="btn">
+            Animation update
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'views'" class="btn">
+            Views
+          </button>
+          <button (click)="selection = 'user'" class="btn">
+            User defined
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.path, eventsOrder.other, eTypes.other, eEnumbs.other.path])" class="btn">
+            End of path
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Views -->
+      <div *ngSwitchCase="'views'" class="panel-content">
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[0], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[0]])"
+          class="btn">
+            Outside view 0
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[0], eventsOrder.other, eTypes.other, eEnumbs.other.boundary[0]])"
+          class="btn">
+            Boundary view 0
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[1], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[1]])"
+          class="btn">
+            Outside view 1
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[1], eventsOrder.other, eTypes.other, eEnumbs.other.views.boundary[1]])"
+          class="btn">
+            Boundary view 1
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[2], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[2]])"
+          class="btn">
+            Outside view 2
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[2], eventsOrder.other, eTypes.other, eEnumbs.other.views.boundary[2]])"
+          class="btn">
+            Boundary view 2
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[3], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[3]])"
+          class="btn">
+            Outside view 3
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[3], eventsOrder.other, eTypes.other, eEnumbs.other.views.boundary[3]])"
+          class="btn">
+            Boundary view 3
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[4], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[4]])"
+          class="btn">
+            Outside view 4
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[4], eventsOrder.other, eTypes.other, eEnumbs.other.views.boundary[4]])"
+          class="btn">
+            Boundary view 4
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[5], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[5]])"
+          class="btn">
+            Outside view 5
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[5], eventsOrder.other, eTypes.other, eEnumbs.other.views.boundary[5]])"
+          class="btn">
+            Boundary view 5
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[6], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[6]])"
+          class="btn">
+            Outside view 6
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[6], eventsOrder.other, eTypes.other, eEnumbs.other.views.boundary[6]])"
+          class="btn">
+            Boundary view 6
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.other.views.outside[7], eventsOrder.other, eTypes.other, eEnumbs.other.views.outside[7]])"
+          class="btn">
+            Outside view 7
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.other.views.boundary[7], eventsOrder.other, eTypes.other, eEnumbs.other.views.boundary[7]])"
+          class="btn">
+            Boundary view 7
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'other'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div *ngSwitchCase="'user'" class="panel-content">
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[0], eventsOrder.other, eTypes.other, eEnumbs.other.user[0]])" class="btn">
+            User 0
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[8], eventsOrder.other, eTypes.other, eEnumbs.other.user[8]])" class="btn">
+            User 8
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[1], eventsOrder.other, eTypes.other, eEnumbs.other.user[1]])" class="btn">
+            User 1
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[9], eventsOrder.other, eTypes.other, eEnumbs.other.user[9]])" class="btn">
+            User 9
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[2], eventsOrder.other, eTypes.other, eEnumbs.other.user[2]])" class="btn">
+            User 2
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[10], eventsOrder.other, eTypes.other, eEnumbs.other.user[10]])" class="btn">
+            User 10
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[3], eventsOrder.other, eTypes.other, eEnumbs.other.user[3]])" class="btn">
+            User 3
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[11], eventsOrder.other, eTypes.other, eEnumbs.other.user[11]])" class="btn">
+            User 11
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[4], eventsOrder.other, eTypes.other, eEnumbs.other.user[4]])" class="btn">
+            User 4
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[12], eventsOrder.other, eTypes.other, eEnumbs.other.user[12]])" class="btn">
+            User 12
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[5], eventsOrder.other, eTypes.other, eEnumbs.other.user[5]])" class="btn">
+            User 5
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[13], eventsOrder.other, eTypes.other, eEnumbs.other.user[13]])" class="btn">
+            User 13
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[6], eventsOrder.other, eTypes.other, eEnumbs.other.user[6]])" class="btn">
+            User 6
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[14], eventsOrder.other, eTypes.other, eEnumbs.other.user[14]])" class="btn">
+            User 14
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.other.user[7], eventsOrder.other, eTypes.other, eEnumbs.other.user[7]])" class="btn">
+            User 7
+          </button>
+          <button (click)="sendAndDismiss([eventList.other.user[15], eventsOrder.other, eTypes.other, eEnumbs.other.user[15]])" class="btn">
+            User 15
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'other'" class="btn btn-dark">Back</button>
+        </div>
+      </div>
+
+      <!-- Mouse -->
+      <div *ngSwitchCase="'mouse'" class="panel-content">
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.mouse.left.button, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.left.button])"
+          class="btn">
+            Left button
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.mouse.right.button, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.right.button])"
+          class="btn">
+            Right button
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.mouse.left.pressed, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.left.pressed])"
+          class="btn">
+            Left pressed
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.mouse.right.pressed, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.right.pressed])"
+          class="btn">
+            Right pressed
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.mouse.left.released, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.left.released])"
+          class="btn">
+            Left released
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.mouse.right.released, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.right.released])"
+          class="btn">
+            Right released
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.mouse.middle.button, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.middle.button])"
+          class="btn">
+            Middle button
+          </button>
+          <button (click)="sendAndDismiss([eventList.mouse.enter, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.enter])" class="btn">
+            Mouse enter
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.mouse.middle.pressed, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.middle.pressed])"
+          class="btn">
+            Middle pressed
+          </button>
+          <button (click)="sendAndDismiss([eventList.mouse.leave, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.leave])" class="btn">
+            Mouse leave
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.mouse.middle.released, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.middle.released])"
+          class="btn">
+            Middle released
+          </button>
+          <button (click)="sendAndDismiss([eventList.mouse.none, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.none])" class="btn">
+            No button
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="sendAndDismiss([eventList.mouse.wheel.up, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.wheel.up])" class="btn">
+            Wheel up
+          </button>
+          <button
+          (click)="sendAndDismiss([eventList.mouse.wheel.down, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.wheel.down])"
+          class="btn">
+            Wheel down
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'global-mouse'" class="btn">
+            Global Mouse
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'base'" class="btn btn-dark">
+            Back
+          </button>
+        </div>
+      </div>
+
+      <!-- Global Mouse -->
+      <div *ngSwitchCase="'global-mouse'" class="panel-content">
+        <div class="two-btn-row">
+          <button
+          (click)="sendAndDismiss([eventList.mouse.global.left.button, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.left.button])"
+          class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Left button
+          </button>
+        <button
+        (click)="sendAndDismiss([eventList.mouse.global.right.button, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.right.button])"
+        class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Right button
+          </button>
+        </div>
+        <div class="two-btn-row">
+        <button
+        (click)="sendAndDismiss([eventList.mouse.global.left.pressed, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.left.pressed])"
+        class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Left pressed
+          </button>
+      <button
+      (click)="sendAndDismiss([eventList.mouse.global.right.pressed, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.right.pressed])"
+      class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Right pressed
+          </button>
+        </div>
+        <div class="two-btn-row">
+      <button
+      (click)="sendAndDismiss([eventList.mouse.global.left.released, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.left.released])"
+      class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Left released
+          </button>
+    <button
+    (click)="sendAndDismiss([eventList.mouse.global.right.released, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.right.released])"
+    class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Right released
+          </button>
+        </div>
+        <div class="two-btn-row">
+      <button
+      (click)="sendAndDismiss([eventList.mouse.global.middle.button, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.middle.button])"
+      class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Middle button
+          </button>
+    <button
+    (click)="sendAndDismiss([eventList.mouse.global.middle.pressed, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.middle.pressed])"
+    class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Middle pressed
+          </button>
+        </div>
+        <div class="two-btn-row">
+  <button
+  (click)="sendAndDismiss([eventList.mouse.global.middle.released, eventsOrder.mouse, eTypes.mouse, eEnumbs.mouse.global.middle.released])"
+  class="btn">
+            <i class="fa fa-fw fa-globe" aria-hidden="true"></i> Middle released
+          </button>
+        </div>
+        <div class="two-btn-row">
+          <button (click)="selection = 'mouse'" class="btn btn-dark">
+            Back
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

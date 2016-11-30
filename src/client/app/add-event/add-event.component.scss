@@ -1,0 +1,99 @@
+@import '../../scss/variables';
+@import '../../scss/panel';
+@import '../../scss/utilities';
+
+.close-btn {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-green-darker;
+  }
+}
+
+.add-event-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow-y: scroll;
+  height: 100%;
+
+  @include stripes(rgba(0,0,0,0.57), rgba(0,0,0,0.6), 45deg, 25px);
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.add-event {
+  @include panel($color-green-light, $color-green-lighter, $color-green-darkest);
+  flex: 1;
+  max-width: 350px;
+  min-width: 300px;
+  margin: auto;
+
+  .btn {
+    text-align: left;
+
+    &:only-child {
+      text-align: center;
+    }
+  }
+
+  // Rounded corners
+  .panel-content .two-btn-row:first-child .btn:first-child {
+    border-radius: 5px 0 0 0;
+  }
+  .panel-content .two-btn-row:first-child .btn:last-child {
+    border-radius: 0 5px 0 0;
+  }
+  .panel-content .two-btn-row:last-child .btn {
+    border-radius: 0 0 5px 5px;
+    border-bottom: solid 2px $color-green-darker;
+  }
+
+  // Double borders
+  .panel-content .two-btn-row:first-child .btn {
+    border-top: solid 2px $color-green-darker;
+  }
+  .panel-content .two-btn-row .btn:first-child {
+    border-left: solid 2px $color-green-darker;
+  }
+  .panel-content .two-btn-row .btn:last-child {
+    border-right: solid 2px $color-green-darker;
+  }
+}
+
+.top-btn-row * {
+  border-radius: 5px 5px 0 0;
+  border-top: solid 2px $color-green-darker;
+  border-left: solid 2px $color-green-darker;
+  border-right: solid 2px $color-green-darker;
+}
+
+.two-btn-row, .top-btn-row {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.input-col-block {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  margin-bottom: 1rem;
+
+  *:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.two-btn-row *, .top-btn-row * {
+  flex: 1;
+}

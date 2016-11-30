@@ -1,0 +1,44 @@
+@import '../../scss/variables';
+
+.left-buttons * {
+  flex-grow: 1;
+  white-space:nowrap;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+  padding: 0.7rem 1rem;
+
+  background-color: $color-green-lighter;
+  border-bottom: solid 1px $color-green-dark;
+
+  .brand {
+    color: $color-green-darkest;
+    font-weight:normal;
+    font-size: 1.5rem;
+    cursor: default;
+    margin-right: 1rem;
+
+    user-select: none;
+  }
+
+  .header-buttons {
+    margin-left: auto;
+    white-space: nowrap;
+
+    * {
+      border-radius: 4px;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .brand {
+    display: none;
+  }
+}

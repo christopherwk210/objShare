@@ -1,0 +1,30 @@
+// Main component
+sd-app {
+  display: flex;
+
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+
+  height: 100%;
+}
+
+// Events panel component
+sd-events {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+
+  flex-grow: 1;
+  overflow: auto;
+}
+
+// GML panel component
+sd-gml {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+
+  flex-grow: 1;
+  overflow: auto;
+}

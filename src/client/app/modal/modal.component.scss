@@ -1,0 +1,60 @@
+@import '../../scss/variables';
+@import '../../scss/panel';
+@import '../../scss/utilities';
+
+.modal-text {
+  margin-top: 0;
+}
+
+.panel-content {
+  // Hack to fix markdown-it unstylable rendering with top margin
+  padding-top: 0 !important;
+
+  .btn {
+    border-radius: 4px;
+  }
+}
+
+.modal-btn-row {
+  text-align:center;
+
+  * {
+    margin:auto 0.5rem;
+  }
+}
+
+.close-btn {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-green-darker;
+  }
+}
+
+.modal-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow-y: scroll;
+  height: 100%;
+
+  @include stripes(rgba(0,0,0,0.57), rgba(0,0,0,0.6), 45deg, 25px);
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.modal {
+  @include panel($color-green-light, $color-green-lighter, $color-green-darkest);
+  flex: 1;
+  max-width: 350px;
+  min-width: 300px;
+  margin: auto;
+}

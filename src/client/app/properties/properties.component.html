@@ -1,0 +1,105 @@
+<div class="objectProperties">
+  <h3 class="title">Object Properties</h3>
+  <div class="panel-content">
+    <div class="input-row">
+      <label>Name:</label>
+      <input style="margin-left: 0.5rem;" type="text" placeholder="obj"
+      (keypress)="catchNameKeyPress($event)" (input)="catchNameInput($event)"
+      [(ngModel)]="objectDataService.objectData.properties.name">
+    </div>
+
+    <div class="input-row">
+      <label>Depth:</label>
+      <input style="margin-left: 0.5rem;" type="text" placeholder="0" numbersOnly
+      [(ngModel)]="objectDataService.objectData.properties.depth">
+    </div>
+    <div class="check-row">
+      <label>
+        <input checked type="checkbox"
+        [(ngModel)]="objectDataService.objectData.properties.visible"> Visible
+      </label>
+      <label>
+        <input type="checkbox"
+        [(ngModel)]="objectDataService.objectData.properties.persistent"> Persistent
+      </label>
+    </div>
+    <div style="margin-bottom: 0;" class="check-row">
+      <label>
+        <input type="checkbox"
+        [(ngModel)]="objectDataService.objectData.properties.solid"> Solid
+      </label>
+      <button (click)="showPhysics = true" class="btn btn-outline check-btn">Physics</button>
+    </div>
+  </div>
+</div>
+
+<!-- Physics Settings -->
+<div *ngIf="showPhysics" class="physics-settings-container">
+  <div class="physics-settings">
+    <h3 class="title">
+      Physics Properties
+      <div class="close-btn" (click)="showPhysics = false">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+      </div>
+    </h3>
+    <div class="panel-content large-label">
+      <div style="margin-bottom: 16px;" class="check-row">
+        <label>
+          <input [(ngModel)]="objectDataService.objectData.properties.physics.uses" type="checkbox"> Uses physics
+        </label>
+        <label>
+          <input [(ngModel)]="objectDataService.objectData.properties.physics.sensor" type="checkbox"> Sensor
+        </label>
+      </div>
+      <div style="margin-bottom: 16px;" class="check-row">
+        <label>
+          <input [(ngModel)]="objectDataService.objectData.properties.physics.awake" type="checkbox"> Start Awake
+        </label>
+        <label>
+          <input [(ngModel)]="objectDataService.objectData.properties.physics.kinematic" type="checkbox"> Kinematic
+        </label>
+      </div>
+      <div class="input-row">
+        <label>Shape:</label>
+        <select [(ngModel)]="objectDataService.objectData.properties.physics.shape" style="margin-left: 0.5rem;">
+          <option>Circle</option>
+          <option>Box</option>
+          <option>Shape</option>
+        </select>
+      </div>
+      <div class="input-row">
+        <label>Density:</label>
+        <input [(ngModel)]="objectDataService.objectData.properties.physics.density"
+        style="margin-left: 0.5rem;" type="number">
+      </div>
+      <div class="input-row">
+        <label>Restitution:</label>
+        <input [(ngModel)]="objectDataService.objectData.properties.physics.restitution"
+        style="margin-left: 0.5rem;" type="number">
+      </div>
+      <div class="input-row">
+        <label>Collision Group:</label>
+        <input [(ngModel)]="objectDataService.objectData.properties.physics.collision"
+        style="margin-left: 0.5rem;" type="number">
+      </div>
+      <div class="input-row">
+        <label>Linear Dampening:</label>
+        <input [(ngModel)]="objectDataService.objectData.properties.physics.linear"
+        style="margin-left: 0.5rem;" type="number">
+      </div>
+      <div class="input-row">
+        <label>Angular Dampening:</label>
+        <input [(ngModel)]="objectDataService.objectData.properties.physics.angular"
+        style="margin-left: 0.5rem;" type="number">
+      </div>
+      <div class="input-row">
+        <label>Friction:</label>
+        <input [(ngModel)]="objectDataService.objectData.properties.physics.friction"
+        style="margin-left: 0.5rem;" type="number">
+      </div>
+      <div style="text-align:center">
+        <button (click)="showPhysics = false" class="btn btn-dark">Dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+@import '../scss/index';
+
+// Global styles go here
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  @include stripes(rgb(242, 255, 241), white, 45deg, 15px);
+}
+
+// Content under header
+.content {
+  display: flex;
+  flex-direction: row;
+
+  flex-grow: 1;
+
+  overflow: auto;
+  padding-top: 1rem;
+
+  .c-left {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+
+    min-width: 300px;
+  }
+
+  .c-right {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+
+    flex: 1;
+  }
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  font-size: 32px;
+  line-height: 3em;
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+
+  color: $color-green-darkest;
+
+  * {
+    margin: 1rem;
+  }
+}
+
+// Love for small devices
+@media screen and (max-width: 768px), screen and (max-height: 540px) {
+  .content {
+    flex-direction: column;
+    overflow:scroll;
+  }
+
+  .c-left {
+    flex-shrink: 0;
+  }
+
+  .c-right {
+    min-height: 500px;
+  }
+
+  sd-events {
+    flex-shrink: 0;
+  }
+}

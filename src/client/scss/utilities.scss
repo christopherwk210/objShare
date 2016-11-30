@@ -1,0 +1,13 @@
+.flex-grow {
+  flex: 1;
+}
+
+@mixin stripes($col1, $col2, $angle, $width) {
+  background: repeating-linear-gradient(
+    $angle,
+    $col1,
+    $col1 $width,
+    $col2 $width,
+    $col2 ($width * 2)
+  );
+}

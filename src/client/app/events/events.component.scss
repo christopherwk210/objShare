@@ -1,0 +1,7 @@
+@import '../../scss/variables';
+@import '../../scss/panel';
+
+.events {
+  @include panel($color-green-light, $color-green-lighter, $color-green-darkest);
+  flex: 1;
+}

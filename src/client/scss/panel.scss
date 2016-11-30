@@ -1,0 +1,36 @@
+@mixin panel($border-color, $title-bg-color, $title-color) {
+  border-radius: 5px;
+  border: solid 1px $border-color;
+  margin: 1rem;
+  margin-top: 0;
+  background-color: $color-green-lightest;
+
+  .title {
+    margin: 0;
+    background-color: $title-bg-color;
+    border-bottom: solid 1px $border-color;
+    padding: 0.5rem 1rem;
+    border-radius: 4px 4px 0 0;
+    color: $title-color;
+    font-weight: normal;
+    cursor: default;
+    user-select: none;
+  }
+
+  [class^="panel-content"] {
+    padding: 1rem;
+  }
+
+  .panel-content-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+    flex: 1;
+  }
+}
+
+.flex-panel {
+  display: flex;
+  flex-direction: column;
+}

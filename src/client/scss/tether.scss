@@ -1,0 +1,45 @@
+.drop-element.drop-open {
+  box-shadow: 0 0 5px $color-green-darker;
+  border: solid 1px $color-green-lighter;
+  min-width: 180px;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: $color-green-lighter;
+  align-content: flex-start;
+  align-items: flex-start;
+
+  button, a {
+    padding: 0.5rem;
+    background-color: $color-green-lighter;
+    border: none;
+    outline: 0;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    text-align: left;
+
+    .fa {
+      margin-right: 0.25rem;
+    }
+
+    &:hover {
+      background-color: $color-green-dark;
+      color: white;
+    }
+
+    @include outline_glow();
+  }
+
+  hr {
+    width: 75%;
+    margin: 0.5rem auto;
+    border-top: none;
+    border-bottom: solid 1px $color-green-darker;
+  }
+}
