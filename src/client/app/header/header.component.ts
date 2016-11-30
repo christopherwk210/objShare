@@ -111,11 +111,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     if (isFileSaverSupported) {
       let objName:string = this.objectDataService.objectData.properties.name;
       if (objName.length === 0) {
-        objName = "myObject";
+        objName = 'myObject';
       }
       let xml = this.xmlService.objectDataToXml(this.objectDataService.objectData);
-      var blob = new Blob([xml], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, objName + ".object.gmx");
+      var blob = new Blob([xml], {type: 'text/plain;charset=utf-8'});
+      saveAs(blob, objName + '.object.gmx');
       this.objectDataService.saved = true;
     }
 

@@ -172,7 +172,7 @@ export const eventOrder: Object = {
   other: 7,
   draw: 8,
   async: 9
-}
+};
 
 /** Represents the XML eventtype attribute value for each event */
 export const eventTypes: Object = {

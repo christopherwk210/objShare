@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class XmlService {
-  physicsShapes: Array<string>
+  physicsShapes: Array<string>;
 
   /**
    * Create XmlService.
@@ -57,7 +57,7 @@ export class XmlService {
       objectDataXML += this.xmlStr('point', '16,16', 2);
       objectDataXML += '  ' + this.elmtStr('PhysicsShapePoints') + '\n';
     } else {
-      objectDataXML += '<PhysicsShapePoints/>\n'
+      objectDataXML += '<PhysicsShapePoints/>\n';
     }
 
     objectDataXML += this.elmtStr('object', true) + '\n';
@@ -152,6 +152,9 @@ export class XmlService {
 
      return `<${closing}${element}${attributes}>`;
    }
+
+   /** Disable tslint beyond this point to preserve polyfill */
+   /* tslint:disable */
 
    /**
     * Polyfill for String.prototype.repeat, taken from
