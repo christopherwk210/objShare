@@ -1,5 +1,6 @@
 objShare
 ---
+[LICENSE](https://github.com/christopherwk210/objShare/blob/master/LICENSE) - [CHANGELOG](https://github.com/christopherwk210/objShare/blob/master/CHANGELOG.md)
 
 objShare is a single page web application that makes it easy to share basic GameMaker: Studio objects that only use GML over the internet.
 
