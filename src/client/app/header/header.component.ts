@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    */
   handlePermalink() {
     let encodedObject = this.objectDataService.encodeObject();
-    return location.origin + '/?__=' + encodedObject;
+    return location.href + '/?__=' + encodedObject;
   }
 
   /**
@@ -87,7 +87,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    */
   handleNewObject() {
     let encodedObject = this.objectDataService.encodeTemplateObject();
-    return location.origin + '/?__=' + encodedObject;
+    return location.href + '/?__=' + encodedObject;
   }
 
   /**
