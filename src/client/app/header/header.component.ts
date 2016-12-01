@@ -126,7 +126,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    */
   showAbout() {
     this.dismissDrops();
-    this.alertService.showModal('About', this.aboutMessage, true, 'Dismiss', 'Visit Github Page', function(res:boolean) {
+    this.alertService.showModal('About', this.aboutMessage, false, 'Dismiss', 'Visit Github Page', function(res:boolean) {
       if (res === false) {
         window.open('https://github.com/christopherwk210/objShare');
       }
