@@ -79,7 +79,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    */
   handlePermalink() {
     let encodedObject = this.objectDataService.encodeObject();
-    return location.href + '/?__=' + encodedObject;
+    let permalink = location.href + '/?__=' + encodedObject;
+    if (permalink.length <= 8181) {
+      window.open(permalink, '_blank');
+    } else {
+      let msg = 'This object is too large to share through a permalink! ' +
+      'This is a known bug with objShare which can be tracked [here](https://github.com/christopherwk210/objShare/issues/1).\n\n' +
+      'Please export your object to share it with others!';
+      this.alertService.showModal('Oops...', msg, true, 'OK');
+    }
   }
 
   /**

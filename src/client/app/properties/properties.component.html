@@ -1,6 +1,11 @@
 <div class="objectProperties">
-  <h3 class="title">Object Properties</h3>
-  <div class="panel-content">
+  <h3 class="title">
+    Object Properties
+    <div class="close-btn" (click)="handleCollapse()">
+      <i [ngClass]="!collapsed ? ['fa', 'fa-minus-square-o'] : ['fa', 'fa-plus-square-o']" aria-hidden="true"></i>
+    </div>
+  </h3>
+  <div *ngIf="!collapsed" class="panel-content">
     <div class="input-row">
       <label>Name:</label>
       <input style="margin-left: 0.5rem;" type="text" placeholder="obj"

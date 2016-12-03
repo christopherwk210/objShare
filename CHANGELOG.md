@@ -1,3 +1,9 @@
+### v1.2.4
+_Dec 3, 2016_
+* Added warning message when permalinking an object that is [too large](https://github.com/christopherwk210/objShare/issues/1)
+* Disabled user scaling on mobile
+* Added collapse button to properties panel to allow for a larger event panel when needed
+
 ### v1.1.3
 _Dec 2, 2016_
 * Added ability to change editor theme

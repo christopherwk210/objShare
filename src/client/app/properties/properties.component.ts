@@ -9,6 +9,8 @@ import { ObjectDataService } from '../shared/index';
 })
 export class PropertiesComponent {
   showPhysics:boolean;
+  collapsed:boolean;
+  expandClasses:String;
 
   /**
    * Injects ObjectDataService service for template access.
@@ -17,6 +19,16 @@ export class PropertiesComponent {
    */
   constructor(private objectDataService: ObjectDataService) {
     this.showPhysics = false;
+    this.collapsed = false;
+    this.expandClasses = 'this.collapsed : fa-minus-square-o ? fa-plus-square-o';
+  }
+
+  /**
+   * Toggles the properties panel open and closed so that
+   * the event panel can expand if needed
+   */
+  handleCollapse() {
+    this.collapsed = !this.collapsed;
   }
 
   /**
