@@ -21,11 +21,50 @@
   <div class="editor-settings">
     <h3 class="title">
       Editor Settings
-      <div class="close-btn" (click)="showSettings = false">
+      <div class="close-btn" (click)="dismissSettings()">
         <i class="fa fa-times-circle" aria-hidden="true"></i>
       </div>
     </h3>
     <div class="panel-content">
+      <div style="margin-bottom: 16px;" class="input-row">
+        <select [ngModel]="editorSettingsTheme" (change)="handleEditorTheme($event)">
+          <option selected disabled>Change Editor Theme</option>
+          <option value="ambiance">Ambiance</option>
+          <option value="chaos">Chaos</option>
+          <option value="chrome">Chrome</option>
+          <option value="clouds_midnight">Clouds Midnight</option>
+          <option value="clouds">Clouds</option>
+          <option value="cobalt">Cobalt</option>
+          <option value="crimson_editor">Crimson Editor</option>
+          <option value="dawn">Dawn</option>
+          <option value="dreamweaver">Dreamweaver</option>
+          <option value="eclipse">Eclipse</option>
+          <option value="github">Github</option>
+          <option value="idle_fingers">Idle Fingers</option>
+          <option value="iplastic">Iplastic</option>
+          <option value="katzenmilch">Katzenmilch</option>
+          <option value="kr_theme">Kr Theme</option>
+          <option value="kuroir">Kuroir</option>
+          <option value="merbivore">Merbivore Soft</option>
+          <option value="merbivore_soft">Merbivore</option>
+          <option value="mono_industrial">Mono Industrial</option>
+          <option value="monokai">Monokai</option>
+          <option value="pastel_on_dark">Pastel on Dark</option>
+          <option value="solarized_dark">Solarized Dark</option>
+          <option value="solarized_light">Solarized Light</option>
+          <option value="sqlserver">SQL server</option>
+          <option value="terminal">Terminal</option>
+          <option value="textmate">Textmate</option>
+          <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
+          <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
+          <option value="tomorrow_night_eighties">Tomorrow Night Eighties</option>
+          <option value="tomorrow_night">Tomorrow Night</option>
+          <option value="tomorrow">Tomorrow</option>
+          <option value="twilight">Twilight</option>
+          <option value="vibrant_ink">Vibrant Ink</option>
+          <option value="xcode">Xcode</option>
+        </select>
+      </div>
       <div class="input-row">
         <label>Font size:</label>
         <input numbersOnly [(ngModel)]="editorSettingsFontSize" style="margin-left: 0.5rem;" type="number" value="16" min="8" max="64">
@@ -44,7 +83,7 @@
         can find <a target="_blank" href="https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts">here</a>.
       </p>
       <div style="text-align:center">
-        <button (click)="showSettings = false" class="btn btn-dark">Cancel</button>
+        <button (click)="dismissSettings()" class="btn btn-dark">Cancel</button>
         <button (click)="editorDefaults()" class="btn btn-dark">Defaults</button>
         <button (click)="saveEditorSettings()" class="btn btn-dark">Save</button>
       </div>

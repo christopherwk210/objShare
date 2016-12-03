@@ -14,6 +14,9 @@ export class ProjectConfig extends SeedConfig {
   FONTS_DEST = `${this.APP_DEST}/fonts`;
   FONTS_SRC = ['node_modules/font-awesome/fonts/**'];
 
+  ACE_THEME_DEST = `${this.APP_DEST}`;
+  ACE_THEME_DIR = ['node_modules/ace-builds/src-min-noconflict/theme-*.js'];
+
   constructor() {
     super();
     this.APP_TITLE = 'objShare';

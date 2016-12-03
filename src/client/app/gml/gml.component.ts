@@ -33,16 +33,22 @@ export class GmlComponent implements AfterViewInit {
   editorSettingsFontSize: number;
   editorSettingsTabSize: number;
   editorSettingsLineHighlighting: boolean;
+  editorSettingsTheme: string;
+
+  /** Temporary theme holder */
+  previousTheme: string;
 
   /** Represents the actual editor settings */
   editorValueFontSize: number;
   editorValueTabSize: number;
   editorValueLineHighlighting: boolean;
+  editorValueTheme: string;
 
   /** Default editor settings */
   default_font:any;
   default_tab:any;
   default_line:any;
+  default_theme:any;
 
   /** Represents the currently editting event */
   current_event:string;
@@ -51,7 +57,8 @@ export class GmlComponent implements AfterViewInit {
   storeKeys:any = {
     font: 'objShare.editorFontSize',
     tab: 'objShare.editorTabSize',
-    line: 'objShare.editorLineHighlighting'
+    line: 'objShare.editorLineHighlighting',
+    theme: 'objShare.editorTheme'
   };
 
   /**
@@ -69,6 +76,7 @@ export class GmlComponent implements AfterViewInit {
     this.default_font = 12;
     this.default_tab = 4;
     this.default_line = true;
+    this.default_theme = 'crimson_editor';
 
     /** Get settings from local storage */
     this.loadSettings();
@@ -98,10 +106,11 @@ export class GmlComponent implements AfterViewInit {
    * Loads editor settings from local storage
    */
   loadSettings() {
-    let font:any, tab:any, line:any;
+    let font:any, tab:any, line:any, theme:any;
     font = Number( this.storageService.get(this.storeKeys.font, this.default_font) );
     tab = Number( this.storageService.get(this.storeKeys.tab, this.default_tab) );
     line = this.storageService.get(this.storeKeys.line, this.default_line);
+    theme = this.storageService.get(this.storeKeys.theme, this.default_theme);
 
     /** Make sure values are valid */
     if (isNaN(font) || font > 64 || font < 8) {
@@ -113,10 +122,14 @@ export class GmlComponent implements AfterViewInit {
     if (typeof line !== 'boolean') {
       line = true;
     }
+    if (typeof theme !== 'string') {
+      theme = 'crimson_editor';
+    }
 
     this.editorSettingsFontSize = this.editorValueFontSize = font;
     this.editorSettingsTabSize = this.editorValueTabSize = tab;
     this.editorSettingsLineHighlighting = this.editorValueLineHighlighting = line;
+    this.editorSettingsTheme = this.editorValueTheme = theme;
   }
 
   /**
@@ -137,6 +150,7 @@ export class GmlComponent implements AfterViewInit {
     this.editor.getSession().setTabSize(this.editorSettingsTabSize);
     document.getElementById('editor').style.fontSize = this.editorSettingsFontSize + 'px';
     this.editor.setHighlightActiveLine(this.editorSettingsLineHighlighting);
+    this.editor.setTheme('ace/theme/' + this.editorSettingsTheme);
 
     let that = this;
     this.editor.on('change', function(e:Object) {
@@ -149,6 +163,17 @@ export class GmlComponent implements AfterViewInit {
   }
 
   /**
+   * Changes the editor theme from the select
+   */
+  handleEditorTheme(e:any) {
+    this.previousTheme = this.editorSettingsTheme || this.default_theme;
+    let select = e.srcElement;
+    let themeName = select.options[select.selectedIndex].value;
+    this.editor.setTheme('ace/theme/' + themeName);
+    this.editorSettingsTheme = themeName;
+  }
+
+  /**
    * Show the editor settings information. Set the settings
    * bindings to be equal to actual editor values.
    */
@@ -156,6 +181,7 @@ export class GmlComponent implements AfterViewInit {
     this.editorSettingsFontSize = this.editorValueFontSize;
     this.editorSettingsTabSize = this.editorValueTabSize;
     this.editorSettingsLineHighlighting = this.editorValueLineHighlighting;
+    this.editorSettingsTheme = this.editorValueTheme;
 
     this.showSettings = true;
   }
@@ -167,6 +193,17 @@ export class GmlComponent implements AfterViewInit {
     this.editorSettingsFontSize = this.default_font;
     this.editorSettingsTabSize = this.default_tab;
     this.editorSettingsLineHighlighting = this.default_line;
+    this.editorSettingsTheme = this.default_theme;
+    this.editor.setTheme('ace/theme/' + this.editorSettingsTheme);
+  }
+
+  /**
+   * Dismisses settings and undoes any temporary theme change
+   */
+  dismissSettings() {
+    this.showSettings = false;
+    this.editorSettingsTheme = this.previousTheme;
+    this.editor.setTheme('ace/theme/' + this.editorSettingsTheme);
   }
 
   /**
@@ -183,11 +220,13 @@ export class GmlComponent implements AfterViewInit {
     this.editorValueFontSize = this.editorSettingsFontSize;
     this.editorValueTabSize = this.editorSettingsTabSize;
     this.editorValueLineHighlighting = this.editorSettingsLineHighlighting;
+    this.editorValueTheme = this.editorSettingsTheme;
 
     /** Save to local storage */
     localStorage.setItem(this.storeKeys.font, this.editorValueFontSize.toString());
     localStorage.setItem(this.storeKeys.tab, this.editorValueTabSize.toString());
     localStorage.setItem(this.storeKeys.line, this.editorValueLineHighlighting.toString());
+    localStorage.setItem(this.storeKeys.theme, this.editorValueTheme);
 
     /** Apply changes to editor */
     this.editor.getSession().setTabSize(this.editorSettingsTabSize);

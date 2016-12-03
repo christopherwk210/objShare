@@ -1,3 +1,8 @@
+### v1.1.3
+_Dec 2, 2016_
+* Added ability to change editor theme
+* Added build script to copy editor themes to build destination
+
 ### v1.0.3
 _Dec 1, 2016_
 * Fixed permalink bug
