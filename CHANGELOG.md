@@ -1,5 +1,5 @@
 ### v1.2.5
-_Dec , 2016_
+_Dec 4, 2016_
 * Fixed dismissing editor settings changing to wrong editor theme
 * Fixed select list displaying poorly on mobile
 * Added ACE ext-* files to build script
