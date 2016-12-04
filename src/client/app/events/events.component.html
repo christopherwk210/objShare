@@ -1,8 +1,8 @@
-<div class="events flex-panel">
+<div (window:resize)="onResize($event)" class="events flex-panel">
   <h3 class="title">Events</h3>
   <div class="panel-content-flex">
     <select (change)="changeCurrentEvent(eventSelectList.value)"
-    #eventSelectList class="flex-grow select-list" size="4" [(ngModel)]="selectedListEvent">
+    #eventSelectList class="flex-grow select-list" [size]="listSizeProperty" [(ngModel)]="selectedListEvent">
       <option *ngFor="let event of objectDataService.objectData.events; let i = index;" [value]="event.event">
         {{event.event}}
       </option>

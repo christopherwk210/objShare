@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { ObjectDataService } from '../shared/index';
 import { AlertService } from '../shared/index';
 
@@ -8,7 +8,11 @@ import { AlertService } from '../shared/index';
   templateUrl: 'events.component.html',
   styleUrls: ['events.component.css']
 })
-export class EventsComponent {
+export class EventsComponent implements AfterViewInit {
+
+  /** Event list size property */
+  listSizeProperty:number;
+
   /** Represents the currently selected item in the event list */
   selectedListEvent: string;
 
@@ -28,6 +32,7 @@ export class EventsComponent {
    */
   constructor(private objectDataService: ObjectDataService,
   private alertService: AlertService) {
+    this.listSizeProperty = 4;
     this.addEventVisible = false;
     this.changingEvent = false;
 
@@ -37,6 +42,36 @@ export class EventsComponent {
         that.selectedListEvent = event.event;
       }
     });
+  }
+
+  /**
+   * Mimic resizing on load to render list properly.
+   * Use a timeout to prevent incorrectchange detection firing.
+   */
+  ngAfterViewInit() {
+    let that = this;
+    setTimeout(function() {
+      that.onResize({
+        target: {
+          innerWidth: window.innerWidth,
+          innerHeight: window.innerHeight
+        }
+      });
+    }, 100);
+  }
+
+  /**
+   * Handler for resizing the window. Fixes the event list size on mobile.
+   * @param {any} event - Window event
+   */
+  onResize(e:any) {
+    this.listSizeProperty = 4;
+    let maxWidth:number = 768;
+    let maxHeight:number = 540;
+
+    if ((e.target.innerWidth <= maxWidth) || (e.target.innerHeight <= maxHeight)) {
+      this.listSizeProperty = 0;
+    }
   }
 
   /**

@@ -1,3 +1,9 @@
+### v1.2.5
+_Dec , 2016_
+* Fixed dismissing editor settings changing to wrong editor theme
+* Fixed select list displaying poorly on mobile
+* Added ACE ext-* files to build script
+
 ### v1.2.4
 _Dec 3, 2016_
 * Added warning message when permalinking an object that is [too large](https://github.com/christopherwk210/objShare/issues/1)

@@ -16,6 +16,7 @@ export class ProjectConfig extends SeedConfig {
 
   ACE_THEME_DEST = `${this.APP_DEST}`;
   ACE_THEME_DIR = ['node_modules/ace-builds/src-min-noconflict/theme-*.js'];
+  ACE_EXT_DIR = ['node_modules/ace-builds/src-min-noconflict/ext-*.js'];
 
   constructor() {
     super();

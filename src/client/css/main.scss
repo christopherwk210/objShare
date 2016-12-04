@@ -67,6 +67,10 @@ body {
 
 // Love for small devices
 @media screen and (max-width: 768px), screen and (max-height: 540px) {
+  .select-list {
+    padding: 0.15rem;
+  }
+
   .content {
     flex-direction: column;
     overflow:scroll;

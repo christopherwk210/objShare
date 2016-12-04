@@ -166,7 +166,6 @@ export class GmlComponent implements AfterViewInit {
    * Changes the editor theme from the select
    */
   handleEditorTheme(e:any) {
-    this.previousTheme = this.editorSettingsTheme || this.default_theme;
     let select = e.srcElement;
     let themeName = select.options[select.selectedIndex].value;
     this.editor.setTheme('ace/theme/' + themeName);
@@ -182,6 +181,7 @@ export class GmlComponent implements AfterViewInit {
     this.editorSettingsTabSize = this.editorValueTabSize;
     this.editorSettingsLineHighlighting = this.editorValueLineHighlighting;
     this.editorSettingsTheme = this.editorValueTheme;
+    this.previousTheme = this.editorSettingsTheme;
 
     this.showSettings = true;
   }
