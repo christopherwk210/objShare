@@ -108,9 +108,32 @@ export class ObjectDataService {
     return fixedEncoding;
   }
 
-  nativeObjectImport(nativeObject:any, objectName:String) {
+  /**
+   * Limits a decimal number to a certain number of places
+   * @param {String} num - The string to edit
+   * @param {number} limit - The amount of places to limit
+   */
+  limitDecimal(num:String, limit:number) {
+    let strs = num.split('.');
+    let res = strs[0];
+    if (strs[1]) {
+      if (strs[1].length > limit) {
+        strs[1] = strs[1].substring(0, limit);
+      }
+      res = strs[0] + '.' + strs[1];
+    }
+    return Number(res);
+  }
 
-    let fixedObject = {
+  /**
+   * Convert a native GM:S object to objectData object
+   * @param {any} nativeObject - The native XML to json object
+   * @param {String} objectName - The name of the object
+   */
+  nativeObjectImport(nativeObject:any, objectName:String) {
+    let that = this;
+    let shapes = ['Circle', 'Box', 'Shape'];
+    let fixedObject:any = {
       properties: {
         depth: nativeObject.depth,
         name: objectName,
@@ -118,21 +141,27 @@ export class ObjectDataService {
         solid: nativeObject.solid === '-1' ? true : false,
         visible: nativeObject.visible === '-1' ? true : false,
         physics: {
-          
+          angular: that.limitDecimal(nativeObject.PhysicsObjectAngularDamping, 5),
+          awake: nativeObject.PhysicsObjectAwake === '-1' ? true : false,
+          collision: Number(nativeObject.PhysicsObjectGroup),
+          density: that.limitDecimal(nativeObject.PhysicsObjectDensity, 5),
+          friction: that.limitDecimal(nativeObject.PhysicsObjectFriction, 5),
+          kinematic: nativeObject.PhysicsObjectKinematic === '-1' ? true : false,
+          linear: that.limitDecimal(nativeObject.PhysicsObjectLinearDamping, 5),
+          restitution: that.limitDecimal(nativeObject.PhysicsObjectRestitution, 5),
+          sensor: nativeObject.PhysicsObjectSensor === '-1' ? true : false,
+          shape: shapes[nativeObject.PhysicsObjectShape],
+          uses: nativeObject.PhysicsObject === '-1' ? true : false
         }
-      }
+      },
+      events: []
     };
 
-    console.log(nativeObject, fixedObject, this.objectData);
-
-
-    // let res:boolean = this.importObject(data);
-    // if (res === false) {
-    //   let errorMsg:string = 'The link that brought you here is invalid, so an object was unable to be loaded.\n\n' +
-    //   'If you believe this message is the result of a bug, you can report it [here](https://github.com/christopherwk210/objShare/issues).';
-    //
-    //   this.alertService.showModal('Oops!', errorMsg, false, 'Okay');
-    // }
+    let res = this.importObject(fixedObject);
+    if (res) {
+      this.sortEvents();
+    }
+    return res;
   }
 
   /**
@@ -157,7 +186,6 @@ export class ObjectDataService {
       this.objectData = parsedString; //Check this object for validity
       this.saved = true;
     }
-
     return success;
   }
 
