@@ -139,6 +139,7 @@
     "markdown-it": "^8.1.0",
     "minimatch": "^3.0.3",
     "normalize.css": "^5.0.0",
+    "objtree": "^0.1.21",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.40",

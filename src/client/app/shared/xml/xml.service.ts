@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+declare var ObjTree:any;
+
 @Injectable()
 export class XmlService {
   physicsShapes: Array<string>;
@@ -10,6 +12,12 @@ export class XmlService {
    */
   constructor() {
     this.physicsShapes = ['Circle', 'Box', 'Shape'];
+  }
+
+  xmlToObject(xmlString: String) {
+    let xotree = new ObjTree()
+    let data = xotree.parseXML(xmlString).object;
+    return data;
   }
 
   /**

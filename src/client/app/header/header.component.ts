@@ -55,6 +55,55 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     });
   }
 
+  handleUploadSelect(e:any) {
+    /** Detect file saving capability */
+    let isFileSaverSupported = false;
+    try {
+      isFileSaverSupported = !!new Blob;
+    } catch (e) {
+      let msg = 'This feature is not supported in your browser!\n' +
+      'Try using a [cooler](https://www.google.com/chrome/browser/desktop/index.html) one.';
+      this.alertService.showModal('Uh-oh', msg, true, 'Okay');
+      isFileSaverSupported = false;
+    }
+
+    if (isFileSaverSupported) {
+      let file = e.target.files['0'];
+
+      if (file) {
+        let name = file.name;
+
+        /** Check type */
+        if (name.substring(name.length-4) !== '.gmx') {
+          this.alertService.showModal('Oops...', 'That isn\'t the correct file type. The object should have a .gmx extension.', true, "OK");
+          return;
+        }
+
+        /** Handle upload */
+        let reader = new FileReader();
+        let that = this;
+        reader.onload = (function(theFile) {
+          return function(e: any) {
+            let realContent = atob( e.target.result.substring(13, e.target.result.length) ).split("ï»¿").join("");
+            let xmlObject = that.xmlService.xmlToObject(realContent);
+            that.objectDataService.nativeObjectImport(xmlObject,
+              file.name.substring(0, file.name.indexOf(".")));
+          };
+        })(file);
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+  /**
+   * Triggers the file input to upload a GMS object
+   * @param {HTMLElement} input - The element reference to the file input
+   */
+  handleGmsUpload(input: HTMLElement) {
+    this.dismissDrops();
+    input.click();
+  }
+
   /** Dismisses all dropdowns */
   dismissDrops() {
     this.fileDrop.close();
