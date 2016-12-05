@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { eventTypes, eventEnumbs, eventOrder, events } from '../index';
 
 @Injectable()
 export class ObjectDataService {
@@ -157,11 +158,42 @@ export class ObjectDataService {
       events: []
     };
 
-    let res = this.importObject(fixedObject);
-    if (res) {
-      this.sortEvents();
+    /** Import events */
+    if (nativeObject.events.event) {
+      nativeObject.events.event.forEach(function(event:any) {
+        let newEvent:any = {};
+        if (Number(event['-eventtype']) === 4) {
+          newEvent.enumb = Number(event['-ename']);
+        } else {
+          newEvent.enumb = Number(event['-enumb']);
+        }
+        newEvent.type = Number(event['-eventtype']);
+        newEvent.event = that.getEventName(0,'');
+        newEvent.order = 0; //that.getEventOrder(type)
+        console.log(event);
+
+        //Loop through actions and combine all GML actions to one
+        //newEvent.gml = concatGml;
+      });
     }
-    return res;
+
+    this.objectData = fixedObject;
+    this.sortEvents();
+  }
+
+  /**
+   * Returns the proper event name for a given type and enumb
+   */
+  getEventName(type:number, enumb:string) {
+    for (let eventType in eventTypes) {
+      if (eventTypes.hasOwnProperty(eventType)) {
+        if (eventTypes[eventType] === type) {
+          console.log(eventType);
+          //Switch on eventType to get correct event, then handle enumb
+        }
+      }
+    }
+    return '';
   }
 
   /**
@@ -186,6 +218,7 @@ export class ObjectDataService {
       this.objectData = parsedString; //Check this object for validity
       this.saved = true;
     }
+    console.log(this.objectData);
     return success;
   }
 
