@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { eventTypes, eventEnumbs, eventOrder, events } from '../index';
+import { eventTypes, eventEnumbs, eventOrder, events, mouseEnumbs,
+  otherEnumbs, drawEnumbs, asyncEnumbs, keyCodeList } from '../index';
 
 @Injectable()
 export class ObjectDataService {
@@ -162,13 +163,13 @@ export class ObjectDataService {
     if (nativeObject.events.event) {
       nativeObject.events.event.forEach(function(event:any) {
         let newEvent:any = {};
-        if (Number(event['-eventtype']) === 4) {
+        newEvent.type = Number(event['-eventtype']);
+        if (newEvent.type === 4) {
           newEvent.enumb = Number(event['-ename']);
         } else {
           newEvent.enumb = Number(event['-enumb']);
         }
-        newEvent.type = Number(event['-eventtype']);
-        newEvent.event = that.getEventName(0,'');
+        newEvent.event = that.getEventName(newEvent.type,newEvent.enumb);
         newEvent.order = 0; //that.getEventOrder(type)
         console.log(event);
 
@@ -182,18 +183,90 @@ export class ObjectDataService {
   }
 
   /**
-   * Returns the proper event name for a given type and enumb
+   * Gives the proper order index based on type
+   * @param {number} type - The event type number
    */
-  getEventName(type:number, enumb:string) {
+  getEventOrder(type:number) {
+    
+  }
+
+  /**
+   * Returns the proper event name for a given type and enumb
+   * @param {number} type - The event type number
+   * @param {any} enumb - The enumb value
+   */
+  getEventName(type:number, enumb:any) {
     for (let eventType in eventTypes) {
       if (eventTypes.hasOwnProperty(eventType)) {
         if (eventTypes[eventType] === type) {
-          console.log(eventType);
-          //Switch on eventType to get correct event, then handle enumb
+          let res = '';
+          switch(eventType) {
+            case 'create': {
+              res = events.create;
+              break;
+            }
+            case 'destroy': {
+              res = events.destroy;
+              break;
+            }
+            case 'alarm': {
+              res = events.alarm[enumb];
+              break;
+            }
+            case 'step': {
+              switch(enumb) {
+                case 0: {
+                  res = events.step.normal;
+                  break;
+                }
+                case 1: {
+                  res = events.step.begin;
+                  break;
+                }
+                case 2: {
+                  res = events.step.end;
+                  break;
+                }
+              }
+              break;
+            }
+            case 'mouse': {
+              res = mouseEnumbs[enumb.toString()];
+              break;
+            }
+            case 'other': {
+              res = otherEnumbs[enumb.toString()];
+              break;
+            }
+            case 'draw': {
+              res = drawEnumbs[enumb.toString()];
+              break;
+            }
+            case 'async': {
+              res = asyncEnumbs[enumb.toString()];
+              break;
+            }
+            case 'collision': {
+              res = events.collision + enumb;
+              break;
+            }
+            case 'keyboard': {
+              res = events.keyboard.keyboard + keyCodeList[enumb.toString()];
+              break;
+            }
+            case 'keypress': {
+              res = events.keyboard.pressed + keyCodeList[enumb.toString()];
+              break;
+            }
+            case 'keyrelease': {
+              res = events.keyboard.released + keyCodeList[enumb.toString()];
+              break;
+            }
+          }
+          return res;
         }
       }
     }
-    return '';
   }
 
   /**
