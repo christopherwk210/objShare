@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { eventTypes, eventEnumbs, eventOrder, events, mouseEnumbs,
-  otherEnumbs, drawEnumbs, asyncEnumbs, keyCodeList } from '../index';
+  otherEnumbs, drawEnumbs, asyncEnumbs, keyCodeList, eventOrder } from '../index';
 
 @Injectable()
 export class ObjectDataService {
@@ -170,7 +170,7 @@ export class ObjectDataService {
           newEvent.enumb = Number(event['-enumb']);
         }
         newEvent.event = that.getEventName(newEvent.type,newEvent.enumb);
-        newEvent.order = 0; //that.getEventOrder(type)
+        newEvent.order = that.getEventOrder(newEvent.type);
         console.log(event);
 
         //Loop through actions and combine all GML actions to one
@@ -187,7 +187,21 @@ export class ObjectDataService {
    * @param {number} type - The event type number
    */
   getEventOrder(type:number) {
-    
+    for (let eventType in eventTypes) {
+      if (eventTypes.hasOwnProperty(eventType)) {
+        if (eventTypes[eventType] === type) {
+
+          for (let orderIndex in eventOrder) {
+            if (eventOrder.hasOwnProperty(orderIndex)) {
+              if (orderIndex === eventType) {
+                return eventOrder[orderIndex];
+              }
+            }
+          }
+
+        }
+      }
+    }
   }
 
   /**
