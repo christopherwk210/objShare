@@ -16,7 +16,13 @@
     <i class="fa fa-file-o" aria-hidden="true"></i> New Object
   </a>
   <hr>
-  <button (click)="exportObject()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Export GM:S Object</button>
+  <button (click)="handleGmsUpload(importGms)">
+    <input (change)="handleUploadSelect($event)" #importGms type="file" style="display:none" />
+    <i class="fa fa-upload" aria-hidden="true"></i> Import GM:S Object
+  </button>
+  <button (click)="exportObject()">
+    <i class="fa fa-floppy-o" aria-hidden="true"></i> Export GM:S Object
+  </button>
 </div>
 
 <div class="dropdown-menu" id="help-drop">

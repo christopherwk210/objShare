@@ -48,5 +48,6 @@ This project is built using Angular 2 on top of the [angular-seed](https://githu
  - [Tether](http://tether.io/)
  - [Drop](http://github.hubspot.com/drop/docs/welcome/)
  - [FileSaver.js](https://eligrey.com/demos/FileSaver.js/)
+ - [ObjTree](https://github.com/rranauro/ObjTree)
 
 Tremendous thanks to [@YellowAfterlife](https://twitter.com/YellowAfterlife) for his awesome work on GML integration in the Ace editor and GML auto-completion, which is used with permission in this project. Check out the amazing [GMLive!](yal.cc/r/gml/)

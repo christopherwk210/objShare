@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { eventTypes, eventOrder, events, mouseEnumbs,
+  otherEnumbs, drawEnumbs, asyncEnumbs, keyCodeList } from '../index';
 
 @Injectable()
 export class ObjectDataService {
@@ -109,6 +111,209 @@ export class ObjectDataService {
   }
 
   /**
+   * Limits a decimal number to a certain number of places
+   * @param {String} num - The string to edit
+   * @param {number} limit - The amount of places to limit
+   */
+  limitDecimal(num:String, limit:number) {
+    let strs = num.split('.');
+    let res = strs[0];
+    if (strs[1]) {
+      if (strs[1].length > limit) {
+        strs[1] = strs[1].substring(0, limit);
+      }
+      res = strs[0] + '.' + strs[1];
+    }
+    return Number(res);
+  }
+
+  /**
+   * Convert a native GM:S object to objectData object
+   * @param {any} nativeObject - The native XML to json object
+   * @param {String} objectName - The name of the object
+   */
+  nativeObjectImport(nativeObject:any, objectName:String) {
+    this.currentEvent.next('');
+    let that = this;
+    let shapes = ['Circle', 'Box', 'Shape'];
+    let fixedObject:any = {
+      properties: {
+        depth: nativeObject.depth,
+        name: objectName,
+        persistent: nativeObject.persistent === '-1' ? true : false,
+        solid: nativeObject.solid === '-1' ? true : false,
+        visible: nativeObject.visible === '-1' ? true : false,
+        physics: {
+          angular: that.limitDecimal(nativeObject.PhysicsObjectAngularDamping, 5),
+          awake: nativeObject.PhysicsObjectAwake === '-1' ? true : false,
+          collision: Number(nativeObject.PhysicsObjectGroup),
+          density: that.limitDecimal(nativeObject.PhysicsObjectDensity, 5),
+          friction: that.limitDecimal(nativeObject.PhysicsObjectFriction, 5),
+          kinematic: nativeObject.PhysicsObjectKinematic === '-1' ? true : false,
+          linear: that.limitDecimal(nativeObject.PhysicsObjectLinearDamping, 5),
+          restitution: that.limitDecimal(nativeObject.PhysicsObjectRestitution, 5),
+          sensor: nativeObject.PhysicsObjectSensor === '-1' ? true : false,
+          shape: shapes[nativeObject.PhysicsObjectShape],
+          uses: nativeObject.PhysicsObject === '-1' ? true : false
+        }
+      },
+      events: []
+    };
+
+    /** Import events */
+    if (nativeObject.events.event) {
+      nativeObject.events.event.forEach(function(event:any) {
+        let newEvent:any = {};
+        newEvent.type = Number(event['-eventtype']);
+        if (newEvent.type === 4) {
+          newEvent.enumb = Number(event['-ename']);
+        } else {
+          newEvent.enumb = Number(event['-enumb']);
+        }
+        newEvent.event = that.getEventName(newEvent.type,newEvent.enumb);
+        newEvent.order = that.getEventOrder(newEvent.type);
+
+        let concatGml:string = '';
+        if (Array.isArray(event.action)) {
+          let resGml = '';
+          let actionCount = 1;
+          for(var i:number = 0; i < event.action.length; i++) {
+            resGml = '';
+            resGml = that.getCode(event.action[i]);
+            if (resGml) {
+              concatGml += '/* Action ' + (actionCount).toString() + ' */\n\n' + resGml + '\n';
+              actionCount++;
+            }
+          }
+        } else {
+          concatGml = that.getCode(event.action);
+        }
+
+        newEvent.gml = concatGml;
+
+        fixedObject.events.push(newEvent);
+      });
+    }
+
+    this.objectData = fixedObject;
+    this.sortEvents();
+  }
+
+  /**
+   * Determines if a native action is a valid code block or not, and returns
+   * the code if it is, or an empty string if it isn't.
+   * @param {any} action - The native event action object
+   */
+  getCode(action:any) {
+    if ((action.id === '603') && (action.kind === '7')) {
+      return action.arguments.argument.string;
+    } else {
+      return '';
+    }
+  }
+
+  /**
+   * Gives the proper order index based on type
+   * @param {number} type - The event type number
+   */
+  getEventOrder(type:number) {
+    for (let eventType in eventTypes) {
+      if (eventTypes.hasOwnProperty(eventType)) {
+        if (eventTypes[eventType] === type) {
+
+          for (let orderIndex in eventOrder) {
+            if (eventOrder.hasOwnProperty(orderIndex)) {
+              if (orderIndex === eventType) {
+                return eventOrder[orderIndex];
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  /**
+   * Returns the proper event name for a given type and enumb
+   * @param {number} type - The event type number
+   * @param {any} enumb - The enumb value
+   */
+  getEventName(type:number, enumb:any) {
+    for (let eventType in eventTypes) {
+      if (eventTypes.hasOwnProperty(eventType)) {
+        if (eventTypes[eventType] === type) {
+          let res = '';
+          switch(eventType) {
+            case 'create': {
+              res = events.create;
+              break;
+            }
+            case 'destroy': {
+              res = events.destroy;
+              break;
+            }
+            case 'alarm': {
+              res = events.alarm[enumb];
+              break;
+            }
+            case 'step': {
+              switch(enumb) {
+                case 0: {
+                  res = events.step.normal;
+                  break;
+                }
+                case 1: {
+                  res = events.step.begin;
+                  break;
+                }
+                case 2: {
+                  res = events.step.end;
+                  break;
+                }
+              }
+              break;
+            }
+            case 'mouse': {
+              res = mouseEnumbs[enumb.toString()];
+              break;
+            }
+            case 'other': {
+              res = otherEnumbs[enumb.toString()];
+              break;
+            }
+            case 'draw': {
+              res = drawEnumbs[enumb.toString()];
+              break;
+            }
+            case 'async': {
+              res = asyncEnumbs[enumb.toString()];
+              break;
+            }
+            case 'collision': {
+              res = events.collision + enumb;
+              break;
+            }
+            case 'keyboard': {
+              res = events.keyboard.keyboard + keyCodeList[enumb.toString()];
+              break;
+            }
+            case 'keypress': {
+              res = events.keyboard.pressed + keyCodeList[enumb.toString()];
+              break;
+            }
+            case 'keyrelease': {
+              res = events.keyboard.released + keyCodeList[enumb.toString()];
+              break;
+            }
+          }
+          return res;
+        }
+      }
+    }
+  }
+
+  /**
    * Decodes encoded object and sets objectData to use
    * the new data. Sets saved to true, since we are loading.
    * @param {string} objectData - encoded object data
@@ -130,7 +335,7 @@ export class ObjectDataService {
       this.objectData = parsedString; //Check this object for validity
       this.saved = true;
     }
-
+    console.log(this.objectData);
     return success;
   }
 

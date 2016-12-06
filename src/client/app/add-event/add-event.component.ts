@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { events, eventOrder, eventTypes, eventEnumbs } from '../shared/index';
-import { AlertService } from '../shared/index';
+import { events, eventOrder, eventTypes, eventEnumbs, AlertService } from '../shared/index';
 
 @Component({
   moduleId: module.id,
