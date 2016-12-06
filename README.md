@@ -19,7 +19,7 @@ objShare provides an interface very similar to the object editor found in GameMa
 
 The code editor supports GML autocompletion and argument hints for GameMaker: Studio and GameMaker Studio 2 iterations of the language.
 
-Exporting to GM:S objects are also supported at this time.
+Importing and exporting GM:S objects are also supported at this time.
 
 Getting Started
 ---
