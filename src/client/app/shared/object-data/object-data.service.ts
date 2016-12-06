@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { eventTypes, eventEnumbs, eventOrder, events, mouseEnumbs,
-  otherEnumbs, drawEnumbs, asyncEnumbs, keyCodeList, eventOrder } from '../index';
+import { eventTypes, eventOrder, events, mouseEnumbs,
+  otherEnumbs, drawEnumbs, asyncEnumbs, keyCodeList } from '../index';
 
 @Injectable()
 export class ObjectDataService {
@@ -133,6 +133,7 @@ export class ObjectDataService {
    * @param {String} objectName - The name of the object
    */
   nativeObjectImport(nativeObject:any, objectName:String) {
+    this.currentEvent.next('');
     let that = this;
     let shapes = ['Circle', 'Box', 'Shape'];
     let fixedObject:any = {
@@ -171,15 +172,44 @@ export class ObjectDataService {
         }
         newEvent.event = that.getEventName(newEvent.type,newEvent.enumb);
         newEvent.order = that.getEventOrder(newEvent.type);
-        console.log(event);
 
-        //Loop through actions and combine all GML actions to one
-        //newEvent.gml = concatGml;
+        let concatGml:string = '';
+        if (Array.isArray(event.action)) {
+          let resGml = '';
+          let actionCount = 1;
+          for(var i:number = 0; i < event.action.length; i++) {
+            resGml = '';
+            resGml = that.getCode(event.action[i]);
+            if (resGml) {
+              concatGml += '/* Action ' + (actionCount).toString() + ' */\n\n' + resGml + '\n';
+              actionCount++;
+            }
+          }
+        } else {
+          concatGml = that.getCode(event.action);
+        }
+
+        newEvent.gml = concatGml;
+
+        fixedObject.events.push(newEvent);
       });
     }
 
     this.objectData = fixedObject;
     this.sortEvents();
+  }
+
+  /**
+   * Determines if a native action is a valid code block or not, and returns
+   * the code if it is, or an empty string if it isn't.
+   * @param {any} action - The native event action object
+   */
+  getCode(action:any) {
+    if ((action.id === '603') && (action.kind === '7')) {
+      return action.arguments.argument.string;
+    } else {
+      return '';
+    }
   }
 
   /**

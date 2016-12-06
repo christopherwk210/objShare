@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
         /** Check type */
         if (name.substring(name.length-4) !== '.gmx') {
-          this.alertService.showModal('Oops...', 'That isn\'t the correct file type. The object should have a .gmx extension.', true, "OK");
+          this.alertService.showModal('Oops...', 'That isn\'t the correct file type. The object should have a .gmx extension.', true, 'OK');
           return;
         }
 
@@ -84,10 +84,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         let that = this;
         reader.onload = (function(theFile) {
           return function(e: any) {
-            let realContent = atob( e.target.result.substring(13, e.target.result.length) ).split("ï»¿").join("");
+            let realContent = atob( e.target.result.substring(13, e.target.result.length) ).split('ï»¿').join('');
             let xmlObject = that.xmlService.xmlToObject(realContent);
             that.objectDataService.nativeObjectImport(xmlObject,
-              file.name.substring(0, file.name.indexOf(".")));
+              file.name.substring(0, file.name.indexOf('.')));
           };
         })(file);
         reader.readAsDataURL(file);

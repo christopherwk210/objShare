@@ -1,6 +1,6 @@
 ### v1.3.5
-_Dec , 2016_
-* Added ObjTree
+_Dec 6, 2016_
+* Added ObjTree library
 * Implemented importing GM: S objects by uploading
 
 ### v1.2.5

@@ -15,7 +15,7 @@ export class XmlService {
   }
 
   xmlToObject(xmlString: String) {
-    let xotree = new ObjTree()
+    let xotree = new ObjTree();
     let data = xotree.parseXML(xmlString).object;
     return data;
   }
