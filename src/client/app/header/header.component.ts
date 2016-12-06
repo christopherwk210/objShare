@@ -143,8 +143,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    * Returns a link to a fresh object
    */
   handleNewObject() {
-    let encodedObject = this.objectDataService.encodeTemplateObject();
-    return location.href + '/?__=' + encodedObject;
+    /** No longer needed. Keeping here in case functionality changes. */
+    // let encodedObject = this.objectDataService.encodeTemplateObject();
+    // return location.href + '/?__=' + encodedObject;
+    return location.href;
   }
 
   /**
