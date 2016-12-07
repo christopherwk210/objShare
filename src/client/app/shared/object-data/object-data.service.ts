@@ -335,7 +335,7 @@ export class ObjectDataService {
       this.objectData = parsedString; //Check this object for validity
       this.saved = true;
     }
-    console.log(this.objectData);
+    
     return success;
   }
 

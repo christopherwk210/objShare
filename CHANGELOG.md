@@ -1,3 +1,8 @@
+### v1.3.6
+_Dec 7, 2016_
+* Greatly increased maximum permalink size (up to 33,000 characters long)
+* Removed extra console log
+
 ### v1.3.5
 _Dec 6, 2016_
 * Added ObjTree library
