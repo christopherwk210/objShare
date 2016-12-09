@@ -2,6 +2,10 @@
   flex: 1;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 @mixin stripes($col1, $col2, $angle, $width) {
   background: repeating-linear-gradient(
     $angle,

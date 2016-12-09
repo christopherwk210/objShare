@@ -12,7 +12,10 @@
         <button (click)="editorSettings()" class="btn"><i class="fa fa-gear" aria-hidden="true"></i> Settings</button>
       </div>
     </div>
-    <div class="flex-grow" #editor id="editor"></div>
+    <div class="no-editor" *ngIf="this.current_event === ''">
+      <span>Please add or select an event to get started!</span>
+    </div>
+    <div [ngClass]="{'invisible': this.current_event === ''}" class="flex-grow editor-overlay" #editor id="editor"></div>
   </div>
 </div>
 

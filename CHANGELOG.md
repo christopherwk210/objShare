@@ -1,3 +1,7 @@
+### v1.4.7
+_Dec 9, 2016_
+* Made the GML editor invisible when no event is selected
+
 ### v1.4.6
 _Dec 9, 2016_
 * When importing or loading a permalink, the top event is automatically selected.

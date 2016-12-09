@@ -2,6 +2,26 @@
 @import '../../scss/panel';
 @import '../../scss/utilities';
 
+.no-editor {
+  text-align: center;
+  color: $color-green-lighter;
+  cursor: default;
+  user-select: none;
+  font-size: 2rem;
+  flex-grow: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    transition: color 1s;
+  }
+
+  span:hover {
+    color: $color-green-light;
+  }
+}
+
 .gml {
   @include panel($color-green-light, $color-green-lighter, $color-green-darkest);
   flex: 1;
