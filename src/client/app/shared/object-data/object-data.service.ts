@@ -197,6 +197,7 @@ export class ObjectDataService {
 
     this.objectData = fixedObject;
     this.sortEvents();
+    this.selectTopEvent();
   }
 
   /**
@@ -334,8 +335,9 @@ export class ObjectDataService {
     if (success) {
       this.objectData = parsedString; //Check this object for validity
       this.saved = true;
+      this.selectTopEvent();
     }
-    
+
     return success;
   }
 
@@ -468,5 +470,13 @@ export class ObjectDataService {
        }
        return 0;
      });
+   }
+
+   /**
+    * Selects the top event as the active one.
+    * To be used when loading an object.
+    */
+   selectTopEvent() {
+     this.setEvent(this.objectData.events[0].event);
    }
 }

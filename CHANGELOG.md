@@ -1,3 +1,7 @@
+### v1.4.6
+_Dec 9, 2016_
+* When importing or loading a permalink, the top event is automatically selected.
+
 ### v1.3.6
 _Dec 7, 2016_
 * Greatly increased maximum permalink size (up to 33,000 characters long)
