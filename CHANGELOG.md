@@ -1,3 +1,9 @@
+### v1.4.8
+_Dec 11, 2016_
+* Fixed new object creation with proper URL
+* Fixed permalink from throwing errors when auto-selecting the top event
+* Fixed re-permalinking from a permalinked URL
+
 ### v1.4.7
 _Dec 9, 2016_
 * Made the GML editor invisible when no event is selected

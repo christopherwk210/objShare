@@ -128,12 +128,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    */
   handlePermalink() {
     let encodedObject = this.objectDataService.encodeObject();
-    let permalink = location.href + '/?__=' + encodedObject;
+    let permalink = location.origin + location.pathname + '?__=' + encodedObject;
     if (permalink.length <= 33000) {
       window.open(permalink, '_blank');
     } else {
       let msg = 'This object is too large to share through a permalink! ' +
-      'Please export your object to share it with others!';
+      'Please export your object to share it with others.';
       this.alertService.showModal('Oops...', msg, true, 'OK');
     }
   }
@@ -145,7 +145,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     /** No longer needed. Keeping here in case functionality changes. */
     // let encodedObject = this.objectDataService.encodeTemplateObject();
     // return location.href + '/?__=' + encodedObject;
-    return location.href;
+    return location.origin + location.pathname;
   }
 
   /**

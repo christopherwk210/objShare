@@ -477,6 +477,8 @@ export class ObjectDataService {
     * To be used when loading an object.
     */
    selectTopEvent() {
-     this.setEvent(this.objectData.events[0].event);
+     if (this.objectData.events[0]) {
+       this.setEvent(this.objectData.events[0].event);
+     }
    }
 }
