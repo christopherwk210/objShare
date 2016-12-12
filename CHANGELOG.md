@@ -1,3 +1,8 @@
+### v1.4.9
+_Dec 12, 2016_
+* Changed menu list icon widths to be fixed-width
+* Added GameMaker Community Manual link in help menu
+
 ### v1.4.8
 _Dec 11, 2016_
 * Fixed new object creation with proper URL
