@@ -1,3 +1,7 @@
+### v1.4.11
+_Dec 13, 2016_
+* Fixed bug where drop down menus were behind the code editor
+
 ### v1.4.10
 _Dec 13, 2016_
 * Fixed bug where visiting a permalinked object prompted you before leaving the page

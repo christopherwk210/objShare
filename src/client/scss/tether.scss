@@ -1,3 +1,7 @@
+.drop-element {
+  z-index: 99;
+}
+
 .drop-element.drop-open {
   box-shadow: 0 0 5px $color-green-darker;
   border: solid 1px $color-green-lighter;
