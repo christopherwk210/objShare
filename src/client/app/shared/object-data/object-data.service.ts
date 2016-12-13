@@ -334,8 +334,8 @@ export class ObjectDataService {
 
     if (success) {
       this.objectData = parsedString; //Check this object for validity
-      this.saved = true;
       this.selectTopEvent();
+      this.saved = true;
     }
 
     return success;

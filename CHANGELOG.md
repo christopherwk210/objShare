@@ -1,3 +1,7 @@
+### v1.4.10
+_Dec 13, 2016_
+* Fixed bug where visiting a permalinked object prompted you before leaving the page
+
 ### v1.4.9
 _Dec 12, 2016_
 * Changed menu list icon widths to be fixed-width
