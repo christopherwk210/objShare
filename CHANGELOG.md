@@ -1,3 +1,8 @@
+### v1.5.12
+_Jan 12, 2017_
+* Integrated Google URL Shortener for shorter permalinks (finally)
+* Fixed bug where removing or changing an event showed a dialog, even if no event was selected
+
 ### v1.4.11
 _Dec 13, 2016_
 * Fixed bug where drop down menus were behind the code editor

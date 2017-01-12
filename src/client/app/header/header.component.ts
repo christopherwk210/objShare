@@ -14,9 +14,15 @@ declare var saveAs:any;
 export class HeaderComponent implements OnInit, AfterViewInit {
   aboutMessage:string;
 
+  /** Show the please wait screen */
+  showPleaseWait:boolean;
+
   /** Drop down holders */
   fileDrop:any;
   helpDrop:any;
+
+  /** URL shortener link */
+  googleApiUrl:string = 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyCavMWhWP9XgiTfiO_tYyyUQROmFZFOB1U';
 
   /**
    * Inject services.
@@ -30,6 +36,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private fileLoaderService: FileLoaderService,
     private objectDataService: ObjectDataService,
     private xmlService: XmlService) {
+      this.showPleaseWait = false;
   }
 
   /**
@@ -129,13 +136,38 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   handlePermalink() {
     let encodedObject = this.objectDataService.encodeObject();
     let permalink = location.origin + location.pathname + '?__=' + encodedObject;
+
     if (permalink.length <= 33000) {
-      window.open(permalink, '_blank');
+      this.showPleaseWait = true;
+
+      let that = this;
+      this.fileLoaderService.post(this.googleApiUrl, JSON.stringify({'longUrl': permalink}))
+        .subscribe(
+          res => that.showPermalinkMessage(res.id, res.longUrl),
+          error => that.openWindow(permalink),
+          () => that.showPleaseWait = false
+        );
     } else {
+      this.showPleaseWait = false;
       let msg = 'This object is too large to share through a permalink! ' +
       'Please export your object to share it with others.';
       this.alertService.showModal('Oops...', msg, true, 'OK');
     }
+  }
+
+  openWindow(url:string) {
+    this.showPleaseWait = false;
+    window.open(url, '_blank');
+  }
+
+  /**
+   * Shows the permalink generated message
+   * @param {string} short - The shortened url
+   * @param {string} original - The long url
+   */
+  showPermalinkMessage(short:string, original:string) {
+    let msg:string = `Here\'s your (shortened) link:\n\n**[${short}](${short})**`;
+    this.alertService.showModal('Permalink created!', msg, true, 'Done');
   }
 
   /**

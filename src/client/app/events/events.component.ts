@@ -79,8 +79,10 @@ export class EventsComponent implements AfterViewInit {
    * @param {string} event - The event we want to change.
    */
   changeExistingEvent(event:string) {
-    this.changingEvent = event;
-    this.addEventVisible = true;
+    if (event.length !== 0) {
+      this.changingEvent = event;
+      this.addEventVisible = true;
+    }
   }
 
   /**
@@ -96,14 +98,16 @@ export class EventsComponent implements AfterViewInit {
    * @param {string} event - The event to remove
    */
   handleRemoveEvent(event:string) {
-    let that = this;
-    let cautionMsg = `Are you sure you want to remove the ${event} event? You will lose your GML for this event.`;
-    this.alertService.showModal('Wait...', cautionMsg, true, 'Yes', 'No', function(res:boolean) {
-      if (res) {
-        that.objectDataService.removeEvent(event);
-        that.changeCurrentEvent('');
-      }
-    });
+    if (event.length !== 0) {
+      let that = this;
+      let cautionMsg = `Are you sure you want to remove the ${event} event? You will lose your GML for this event.`;
+      this.alertService.showModal('Wait...', cautionMsg, true, 'Yes', 'No', function(res:boolean) {
+        if (res) {
+          that.objectDataService.removeEvent(event);
+          that.changeCurrentEvent('');
+        }
+      });
+    }
   }
 
   /**

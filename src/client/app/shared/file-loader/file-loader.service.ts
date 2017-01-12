@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { RequestOptions, Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class FileLoaderService {
@@ -24,11 +25,25 @@ export class FileLoaderService {
   }
 
   /**
+   * Returns an Observable for an HTTP json POST request
+   * @param {string} url - URL to post to
+   * @param {string} data - Stringified JSON to post
+   */
+   post(url:string, data:string):Observable<any> {
+     let headers = new Headers({'Content-Type': 'application/json'});
+     let options = new RequestOptions({ headers: headers });
+
+     return this.http.post(url, data, options)
+                     .map(res => res.json())
+                     .catch((error:any) => Observable.throw(error));
+   }
+
+  /**
     * Handle HTTP error
     */
   private handleError (error: any) {
     let errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'File error';
+      error.status ? `${error.status} - ${error.statusText}` : 'HTTP error';
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
