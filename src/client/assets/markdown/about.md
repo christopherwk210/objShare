@@ -1,6 +1,6 @@
 objShare v1.4.11
 ---
-_Copyright © 2016 - Chris Anselmo_
+_Copyright © 2017 - Chris Anselmo_
 
 **objShare** is a single page web application that makes it easy to share basic GameMaker: Studio objects that only use GML over the internet.
 
