@@ -155,9 +155,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Used to open a new window with the correct permalink. Now
+   * shows a modal with an easy to copy link
+   */
   openWindow(url:string) {
     this.showPleaseWait = false;
-    window.open(url, '_blank');
+    // window.open(url, '_blank');
+    let msg:string = `Here\'s your link:\n\n**[Click here!](${url})**`;
+    this.alertService.showModal('Permalink created!', msg, true, 'Done');
   }
 
   /**

@@ -1,3 +1,7 @@
+### v1.5.13
+_Feb 18, 2017_
+* Fallback to long permalinks now shows modal instead of opening a new window
+
 ### v1.5.12
 _Jan 12, 2017_
 * Integrated Google URL Shortener for shorter permalinks (finally)
