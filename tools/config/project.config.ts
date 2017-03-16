@@ -40,7 +40,7 @@ export class ProjectConfig extends SeedConfig {
       {src: 'tether-drop/dist/js/drop.min.js', inject: 'libs'},
       {src: 'tether-drop/dist/css/drop-theme-arrows.min.css', inject: true},
       {src: 'file-saver/FileSaver.min.js', inject: 'libs'},
-      {src: 'objtree/objtree.js', inject: 'libs'},
+      {src: 'objtree/index.js', inject: 'libs'},
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
