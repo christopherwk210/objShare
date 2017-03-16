@@ -3,7 +3,9 @@ import { Directive, ElementRef, Renderer, HostListener } from '@angular/core';
 @Directive({ selector: '[numbersOnly]' })
 export class NumbersOnlyDirective {
 
-    constructor(el: ElementRef, renderer: Renderer) {}
+    constructor(el: ElementRef, renderer: Renderer) {
+      //
+    }
 
     /** Catch all keypresses and only allow numbers through */
     @HostListener('keypress', ['$event']) onKeyPress(e:any) {

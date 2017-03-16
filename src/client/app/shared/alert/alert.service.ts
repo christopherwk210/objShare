@@ -10,7 +10,7 @@ export class AlertService {
   md = markdownit();
 
   /** Subject for passing callback to modal component */
-  callback: Subject<Function> = new BehaviorSubject<Function>(function(){});
+  callback: Subject<Function> = new BehaviorSubject<Function>(function(){return false;});
 
   /** Modal properties */
   alertVisible: boolean; /** Modal visibility */
@@ -42,7 +42,8 @@ export class AlertService {
    * @param {string} [cancelBtnText] - Cancel button text. If not provided, button will not show.
    * @param {Function} [callback] - Callback function on dismissal.
    */
-  showModal(title:string, text:string, showClose:boolean, btnText:string, cancelBtnText:string = '', callback:Function = function(){}) {
+  showModal(title:string, text:string, showClose:boolean, btnText:string, cancelBtnText:string = '',
+  callback:Function = function(){return false;}) {
     this.alertVisible = true;
     this.closeButton = showClose;
     this.alertTitle = title;

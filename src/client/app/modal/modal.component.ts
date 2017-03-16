@@ -17,7 +17,7 @@ export class ModalComponent {
    * @constructor
    */
   constructor(private alertService: AlertService) {
-    this.callback = function(){};
+    this.callback = () => {return false;};
     alertService.callback.subscribe((cb) => {
       this.callback = cb;
     });

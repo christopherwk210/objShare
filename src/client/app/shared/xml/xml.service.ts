@@ -39,9 +39,11 @@ export class XmlService {
 
     for(var i = 0; i < oData.events.length; i++) {
       if (oData.events[i].type === 4) {
-        objectDataXML += '    ' + this.elmtStr('event', false, `eventtype="${oData.events[i].type}" ename="${oData.events[i].enumb}"`) + '\n';
+        objectDataXML += '    ' +
+        this.elmtStr('event', false, `eventtype="${oData.events[i].type}" ename="${oData.events[i].enumb}"`) + '\n';
       } else {
-        objectDataXML += '    ' + this.elmtStr('event', false, `eventtype="${oData.events[i].type}" enumb="${oData.events[i].enumb}"`) + '\n';
+        objectDataXML += '    ' +
+        this.elmtStr('event', false, `eventtype="${oData.events[i].type}" enumb="${oData.events[i].enumb}"`) + '\n';
       }
       objectDataXML += this.xmlCode(oData.events[i].gml, 3);
       objectDataXML += '    ' + this.elmtStr('event', true) + '\n';

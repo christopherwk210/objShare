@@ -4,12 +4,6 @@ import { Injectable } from '@angular/core';
 export class StorageService {
 
   /**
-   * Create StorageService.
-   * @constructor
-   */
-  constructor() {}
-
-  /**
    * Gets a value from local storage. If the value
    * isn't set, it will set it using the default value given.
    * @param {string} key - Local storage key to check

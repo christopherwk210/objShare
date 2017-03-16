@@ -21,7 +21,10 @@ declare var gml_keywords:any;
   styleUrls: ['gml.component.css']
 })
 export class GmlComponent implements AfterViewInit {
+  /** Disable tslint - YAL ace code */
+  /* tslint:disable */
   gml_keywords:string = 'globalvar|var|if|then|else|begin|end|for|while|do|until|repeat|switch|case|default|break|continue|with|exit|return|self|other|noone|all|global|local|mod|div|not|and|or|xor|enum|debugger';
+  /* tslint:enable */
 
   /** Decalre a variable to store the editor reference */
   editor: any;
