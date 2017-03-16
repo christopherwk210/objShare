@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { routes } from './app.routes';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import { HeaderModule } from './header/header.module';
 import { PropertiesModule } from './properties/properties.module';
@@ -16,9 +15,18 @@ import { ModalModule } from './modal/modal.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  imports: [BrowserModule, HttpModule, HeaderModule, PropertiesModule,
-    EventsModule, GmlModule, AddEventModule, ModalModule,
-    SharedModule.forRoot(), RouterModule.forRoot(routes)],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    AppRoutingModule,
+    HeaderModule,
+    PropertiesModule,
+    EventsModule,
+    GmlModule,
+    AddEventModule,
+    ModalModule,
+    SharedModule.forRoot()
+  ],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,
@@ -27,5 +35,4 @@ import { SharedModule } from './shared/shared.module';
   bootstrap: [AppComponent]
 
 })
-
 export class AppModule { }

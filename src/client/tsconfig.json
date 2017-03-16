@@ -5,6 +5,7 @@
     "declaration": false,
     "removeComments": true,
     "noLib": false,
+    "lib": ["es2016", "dom"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
@@ -12,19 +13,17 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "noImplicitAny": true,
-    "noImplicitReturns": false,
+    "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "../../node_modules/@types",
       "../../node_modules"
     ],
     "types": [
-      "core-js",
-      "express",
-      "jasmine",
       "node",
-      "protractor",
+      "jasmine",
       "systemjs"
     ]
   },

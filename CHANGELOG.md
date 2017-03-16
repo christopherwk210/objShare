@@ -1,3 +1,7 @@
+### v1.6.13
+_Mar 16, 2017_
+* Updated to newest angular seed & various dependencies, removed router outlet (route no longer needed)
+
 ### v1.5.13
 _Feb 18, 2017_
 * Fallback to long permalinks now shows modal instead of opening a new window

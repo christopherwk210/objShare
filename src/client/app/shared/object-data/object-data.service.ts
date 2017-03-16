@@ -84,6 +84,8 @@ export class ObjectDataService {
 
       if ((stringyObject !== stringyInitialObject) && (that.saved === false)) {
         return that.dirtyMessage;
+      } else {
+        return undefined;
       }
     };
   }
@@ -312,6 +314,7 @@ export class ObjectDataService {
         }
       }
     }
+    return undefined;
   }
 
   /**
