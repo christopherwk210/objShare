@@ -1,6 +1,6 @@
 ### v1.6.13
 _Mar 16, 2017_
-* Updated to newest angular seed & various dependencies, removed router outlet (route no longer needed)
+* Updated to newest angular seed & dependencies
 
 ### v1.5.13
 _Feb 18, 2017_
